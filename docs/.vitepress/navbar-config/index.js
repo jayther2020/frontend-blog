@@ -4,6 +4,5 @@ export const nav = [
   {text: "知识索引", link: "/pages/knowledge/",activeMatch: "/pages/knowledge/"},
   {text: "解决方案", link: "/pages/solutions/",activeMatch: "/pages/solutions/"},
   {text: "错误库", link: "/pages/pitfalls/",activeMatch: "/pages/pitfalls/"},
-  {text: "待解决问题", link: "/pages/unsolved-problems/",activeMatch:"/pages/unsolved-problems/"},
   {text: "心得体会", link: "/pages/thoughts/",activeMatch:"/pages/thoughts/"},
 ]

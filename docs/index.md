@@ -10,6 +10,9 @@ hero:
     alt: Kitty
   actions:
     - theme: alt
+      text: 前端工具
+      link: /articles/组件库环境搭建
+    - theme: alt
       text: 知识索引
       link: /articles/组件库环境搭建
     - theme: alt

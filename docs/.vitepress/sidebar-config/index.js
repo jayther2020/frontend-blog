@@ -1,7 +1,6 @@
 const featuredBlogSidebar = [
   {
     text: "精妙文章",
-    link: "/pages/featured-blogs/blogs/",
     collapsible: true,
     items: [
       {
@@ -32,53 +31,104 @@ const featuredBlogSidebar = [
   },
   {
     text: "大牛博客",
-    link: "/pages/featured-blogs/extraordinary-people",
-    collapsible: true
-  },
+    collapsible: true,
+    items: [
+      {
+        text: "大牛列表",
+        link: "/pages/featured-blogs/extraordinary-people",
+      }
+    ]
+  }
 ]
 
 const toolsSidebar = [
   {
-    text: "前端素材相关",
-    link: "/pages/tool/素材/",
+    text: "三件套相关",
     collapsible: true,
+    items: [
+      {
+        text: "前端素材相关",
+        link: "/pages/tool/素材/",
+      },
+      {
+        text: "HTML相关",
+        link: "/pages/tool/HTML/",
+      },
+      {
+        text: "CSS相关",
+        link: "/pages/tool/CSS/",
+      },
+      {
+        text: "JS相关",
+        link: "/pages/tool/JS/",
+      },
+    ]
   },
   {
-    text: "HTML相关",
-    link: "/pages/tool/HTML/",
+    text: "组件化和框架",
     collapsible: true,
+    items: [
+      {
+        text: "Vue相关",
+        link: "/pages/tool/VUE/",
+        // items:[{
+        //   text: "VueRouter",
+        //   link: "/pages/tool/vue2/vue-router"
+        // }]
+      },
+      {
+        text: "NodeJS相关",
+        link: "/pages/tool/NODEJS",
+      }
+    ]
   },
   {
-    text: "CSS相关",
-    link: "/pages/tool/CSS/",
+    text: "其他工具",
     collapsible: true,
-  },
-  {
-    text: "JS相关",
-    link: "/pages/tool/JS/",
-    collapsible: true,
-  },
-  {
-    text: "Vue相关",
-    link: "/pages/tool/VUE/",
-    collapsible: true,
-    // items:[{
-    //   text: "VueRouter",
-    //   link: "/pages/tool/vue2/vue-router"
-    // }]
-  },
-  {
-    text: "NodeJS相关",
-    link: "/pages/tool/NODEJS",
-    collapsible: true,
-  }, {
-    text: "其他相关",
-    link: "/pages/tool/OTHERS",
-    collapsible: true,
+    items: [
+      {
+        text: "其他工具列表",
+        link: "/pages/tool/OTHERS",
+      }
+    ]
   }
+]
+
+const solutionSidebar = [
+  {
+    text: "已解决问题",
+    collapsible: true,
+    items: [
+      {
+        text: "VUE2",
+        link: "/pages/solution/vue2"
+      },
+      {
+        text: "VUE3",
+        link: "/pages/solution/vue3"
+      },
+      {
+        text: "NodeJS",
+        link: "/pages/solution/nodejs"
+      },
+      {
+        text: "Webpack",
+        link: "/pages/solution/webpack"
+      }
+    ]
+  },
+  {
+    text: "待解决问题",
+    collapsible: true,
+    items: [{
+      text: "未解决问题列表",
+      link: "/pages/solution/unsolved-problems"
+    }]
+  },
 ]
 
 export const sidebar = {
   "/pages/featured-blogs/": featuredBlogSidebar,
   "/pages/tools/": toolsSidebar,
+  "/pages/solutions/": solutionSidebar,
 }
