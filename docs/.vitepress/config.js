@@ -2,6 +2,7 @@ import {nav} from "./navbar-config"
 import {sidebar} from "./sidebar-config";
 
 export default {
+  base:'/frontend-blog/',
   title: '个人前端知识库', //站点标题
   description: '用来整理自己所学的前端知识，收藏过的技术博客，心得体会等',//mate标签description，多用于搜索引擎抓取摘要
   themeConfig: {
