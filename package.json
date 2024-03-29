@@ -14,5 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "vitepress": "1.0.0-alpha.22"
+  },
+  "devDependencies": {
+    "sass": "^1.72.0"
   }
 }
