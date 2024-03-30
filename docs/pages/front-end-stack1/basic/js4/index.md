@@ -576,6 +576,18 @@ axios.get('/api/data', {
 source.cancel('Operation canceled by the user.');
 ```
 
+新方法则是用`AbortController`对象来取消请求。用`signal`接受取消信号。
+
+```js
+const controller = new AbortController();
+
+axios.get('/foo/bar', {
+   signal: controller.signal
+}).then(function(response) {/**/});
+// 取消请求
+controller.abort()
+```
+
 ## 数据服务
 
 **json-server**
