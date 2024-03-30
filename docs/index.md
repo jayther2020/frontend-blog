@@ -11,13 +11,13 @@ hero:
   actions:
     - theme: alt
       text: 前端基础
-      link: /articles/组件库环境搭建
+      link: /pages/front-end-stack1/
     - theme: alt
-      text: 知识索引
-      link: /articles/组件库环境搭建
+      text: 前端框架
+      link: /pages/front-end-stack2/
     - theme: alt
-      text: 错误库
-      link: /articles/组件库环境搭建
+      text: 计算机基础
+      link: /pages/computer-knowledge-stack/
     - theme: brand
       text: 我的Gitee
       link: https://gitee.com/jayther2020

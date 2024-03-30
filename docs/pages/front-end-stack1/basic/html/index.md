@@ -1,3 +1,7 @@
+# HTML笔记
+
+![DALL·E 2023-08-05 16.41.06 - a silhouette of an enormous intergatlic metropolis with neon lights and massive spaceships beside the galaxy](./index.assets/cover.png)
+
 ## HTML5新特性
 
 > - 新的语义标签，比如 header、nav、section、article、footer。

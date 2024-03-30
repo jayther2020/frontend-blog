@@ -1313,7 +1313,7 @@ suggestion.onmouseover = function (e) {
 
 ## HTML5跨域通信
 
-![如何在HTML5中进行跨域通信（Cross Doc...](./index.assets/如何在HTML5中进行跨域通信（Cross Doc....png)
+![如何在HTML5中进行跨域通信（Cross Doc...](./index.assets/cdm.png)
 
 > Cross Document Messaging，简称CDM，目前只有一个由另外一个页面打开的页面才有效
 
