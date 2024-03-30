@@ -172,10 +172,10 @@ console.log("================================")
 //### 空间复杂度从上至下变大 ###//
 
 //#空间复杂度为O(1)
-let x:number=0
+let x:number = 0
 
 //#空间复杂度为O(n)
-let x:number[]=[...]
+let x:number[] = [...]
 
 //#空间复杂度为O(n^2)
 let x:number[][] = [[...],[...],[...],...]
@@ -263,10 +263,10 @@ function fn(x: number){
 
 ```typescript
 /**
-* 恒生：求股票最佳购买方案
-* @param prices int整型一维数组 一个数字数组，其中的每个元素表示股票在连续天数内的价格
-* @return int整型
-*/
+ * 用于解决股票买卖问题的函数，允许用户在给定一系列连续天数的股票价格时，通过多次买卖来实现最大利润。
+ * @param prices int整型一维数组 一个数字数组，其中的每个元素表示股票在连续天数内的价格
+ * @return int整型
+ */
 function maxProfitWithMultipleTransactions(prices) {
   // write code here
   let j = 0, maxProfit = 0

@@ -20,5 +20,6 @@ export const nav = [
     ]
   },
   { text: "计算机基础", link: "/pages/computer-knowledge-stack/", activeMatch: "/pages/computer-knowledge-stack/" },
+  { text: "前端工具", link: "/pages/useful/", activeMatch: "/pages/useful/" },
   { text: "心得体会", link: "/pages/thoughts/", activeMatch: "/pages/thoughts/" },
 ]

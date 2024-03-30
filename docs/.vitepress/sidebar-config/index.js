@@ -1,4 +1,4 @@
-const featuredBlogSidebar = [
+const basicSidebar = [
   {
     text: "前端基础",
     collapsible: true,
@@ -16,12 +16,20 @@ const featuredBlogSidebar = [
         link: "/pages/front-end-stack1/basic/css2/"
       },
       {
+        text: "CSS杂糅知识",
+        link: "/pages/front-end-stack1/basic/css3/"
+      },
+      {
         text: "JavaScript",
         link: "/pages/front-end-stack1/basic/js1/"
       },
       {
         text: "JavaScript进阶",
         link: "/pages/front-end-stack1/basic/js2/"
+      },
+      {
+        text: "ES2015+索引",
+        link: "/pages/front-end-stack1/basic/es6-onwards-dex/"
       },
       {
         text: "异步JavaScript",
@@ -44,16 +52,20 @@ const featuredBlogSidebar = [
       {
         text: "jQuery",
         link: "/pages/front-end-stack1/tools/jquery/",
-      }
+      },
+      {
+        text: "Bootstrap",
+        link: "/pages/front-end-stack1/tools/bootstrap/",
+      },
       // {
-      //   text: "Bootstrap",
-      //   link: "/pages/front-end-stack1/tools/bootstrap/",
-      // }
+      //   text: "其他前端工具索引",
+      //   link: "/pages/front-end-stack1/tools/frontend-tooldex/",
+      // },
     ]
   }
 ]
 
-const toolsSidebar = [
+const frameworkSidebar = [
   {
     text: "前端框架",
     collapsible: true,
@@ -133,46 +145,56 @@ const cksSidebar = [
   },
 ]
 
-const pitfallSidebar = [
+const usefulToolsSidebar = [
   {
-    text: "踩坑详情",
+    text: "自用工具",
     collapsible: true,
     items: [
       {
-        text: "CSS相关",
-        link: "/pages/pitfalls/css/index"
+        text: "代码片段",
+        link: "/pages/useful/snippets"
       },
       {
-        text: "CSS预处理器相关",
-        link: "/pages/pitfalls/css+/index"
-      },
-      {
-        text: "JS相关",
-        link: "/pages/pitfalls/js/index"
-      },
-      {
-        text: "NodeJS相关",
-        link: "/pages/pitfalls/nodejs/index"
-      },
-      {
-        text: "NPM相关",
-        link: "/pages/pitfalls/npm/index"
-      },
-      {
-        text: "Vue相关",
-        link: "/pages/pitfalls/vue/index"
-      },
-      {
-        text: "其他相关",
-        link: "/pages/pitfalls/others/index"
+        text: "Swiss工具库",
+        link: "/pages/useful/swiss"
       },
     ]
-  }
+  },
+  
+  {
+    text: "前端学习",
+    collapsible: true,
+    items: [
+      {
+        text: "官方文档",
+        link: "/pages/useful/docs"
+      },
+      {
+        text: "演练操场",
+        link: "/pages/useful/playground"
+      },
+    ]
+  },
+
+  // {
+  //   text: "其他前端工具索引",
+  //   collapsible: true,
+  //   items: [
+  //     {
+  //       text: "颜色获取",
+  //       link: "/pages/useful/colors"
+  //     },
+  //     {
+  //       text: "颜色获取",
+  //       link: "/pages/useful/colors"
+  //     },
+  //   ]
+  // }
 ]
 
 export const sidebar = {
-  "/pages/front-end-stack1/": featuredBlogSidebar,
-  "/pages/front-end-stack2/": toolsSidebar,
+  "/pages/front-end-stack1/": basicSidebar,
+  "/pages/front-end-stack2/": frameworkSidebar,
   "/pages/computer-knowledge-stack/": cksSidebar,
-  // "/pages/thoughts/": cksSidebar,
+  "/pages/useful/": usefulToolsSidebar,
 }
