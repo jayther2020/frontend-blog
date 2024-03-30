@@ -1,6 +1,6 @@
 ---
-layout: home
-
+layout: home 
+ 
 hero:
   name: 个人前端知识库
   text: 杰者的前端知识系统.

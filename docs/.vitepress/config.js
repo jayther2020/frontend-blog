@@ -3,12 +3,13 @@ import {sidebar} from "./sidebar-config";
 
 export default {
   base:'/frontend-blog/',
-  title: '个人前端知识库', //站点标题
+  title: '✨杰者-前端知识库✨', //站点标题
   description: '用来整理自己所学的前端知识，收藏过的技术博客，心得体会等',//mate标签description，多用于搜索引擎抓取摘要
+  head: [['link', { rel: 'icon', href: '/common/icon.ico' }]],
   themeConfig: {
-    siteTitle: "个人前端知识库",
+    siteTitle: "杰者-前端知识库",
     outlineTitle: '目录', // 右侧大纲标题文本配置
-    // logo: "public/index.png",
+    // logo: "/common/icon.ico",
     nav,
     sidebar,
     socialLinks:[
