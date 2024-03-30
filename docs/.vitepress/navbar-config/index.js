@@ -3,7 +3,7 @@ export const nav = [
     text: "前端基础",
     items: [
       { text: 'HTML', link: '/pages/front-end-stack1/basic/html/' },
-      { text: 'CSS', link: '/pages/front-end-stack1/basic/css/' },
+      { text: 'CSS', link: '/pages/front-end-stack1/basic/css1/' },
       { text: 'Javascript', link: '/pages/front-end-stack1/basic/js1/' },
       { text: '网络请求', link: '/pages/front-end-stack1/basic/js4/' },
       { text: 'jQUERY', link: '/pages/front-end-stack1/tools/jquery/' },
