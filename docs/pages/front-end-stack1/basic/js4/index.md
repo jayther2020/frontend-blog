@@ -13,9 +13,9 @@
 3. Update - PUT / PATCH
 4. Delete - DELETE
 
-**幂等性（Idempotent）**：多次请求一个url而返回值不变（identical outcome if called multiple times. ）
+**幂等性（Idempotent）**：多次请求同个URL而返回值不变（identical outcome if called multiple times. ）
 
-**安全性（Safe）**：此次请求不会修改后台
+**安全性（Safe）**：请求不会修改后台（will not have any effect on the state of the server.）
 
 |方法名	|安全性	|幂等性	|可缓存性	|请求方法的作用|
 | ---------- | ---- | ---- | ---- | ---- |
@@ -559,7 +559,7 @@ cancel();
 this.$cancelRequest()
 ```
 
-另一种方法是使用
+另一种方法是使用`axios.CancelToken.source()`来进行请求取消
 
 ```js
 const source = axios.CancelToken.source();
