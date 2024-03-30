@@ -1617,7 +1617,7 @@ function* quips(name) {
     yield "see you later!";
 }
 
-for(let quote of quips()){
+for(let quote of quips('')){
     console.log(quote)
 }
 ```

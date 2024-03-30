@@ -6,11 +6,27 @@
 
 `$("类名/标签名/...")`
 
-等文档加载完毕再准备JS代码
+## document的load和ready
+
+> 1. load是当页面*所有资源全部加载*完成后（包括DOM文档树，css文件，js文件，图片资源等），执行一个函数，
+>
+>    缺点:问题是如果图片资源较多，加载时间较长，onload后等待执行的函数需要等待较长时间，所以一些效果可能受到影响
+>
+> 2. $(document).ready()是*只当DOM文档树加载完成*后执行一个函数 （不包含图片，css等）所以会比load较快执行，
+>
+>    在原生的JS中不包括ready()这个方法，只有load方法就是onload事件
 
 ```js
+$(document).load(function(){
+    $("div").hide();
+})
+
+$(document).ready(function(){
+    $("div").hide();
+})
+// document ready 简写
 $((function(){
-  $("div").hide();
+  	$("div").hide();
 })
 ```
 
@@ -22,7 +38,7 @@ var xkl = document.querySelector("div")
 
 > 转换为jQuery对象为：`$(xkl)`
 
-更改样式
+## 更改样式
 
 ```js
 $("div").css("width", "300px")
@@ -40,7 +56,7 @@ $("div").css({
 })
 ```
 
-## 筛选选择器
+## 通过选择器筛选
 
 `$("li:first")`：获取第一个元素
 `$("li:last")`：获取最后一个
@@ -49,7 +65,8 @@ $("div").css({
 
 `$("li:even")`：获取索引号为偶数的元素
 
-筛选方法
+## 节点导航
+
 `$(".son").parent()`：获取.son的父级
 `$(".son").parents("类名")`：如果需要写过多的parent()，可以选择将父级类名写在parents括号里直接获取
 `$(".father").children("li")`：选择.father的子元素，不包含孙，相当于.father>li
@@ -58,11 +75,16 @@ $("div").css({
 `$(".son").nextAll()`：获取当前父级内在.son之后的兄弟元素，括号内的用法与siblings一样
 `$(".son").prevtAll()`：获取当前父级内在.son之前的兄弟元素，括号内的用法与siblings一样
 
+## 元素的类控制
 
+| 功能                    | jQuery                            | 原生等价方法                       |
+| ----------------------- | --------------------------------- | ---------------------------------- |
+| 开关CSS样式类           | `$("div").toggleClass("current")` | `el.classList.toggle("current")`   |
+| 判断li是否有box这个类名 | `$("div").hasclass("current")`    | `el.classList.contains("current")` |
+| 添加CSS样式类           | `$("div").addClass("current")`    | `el.classList.add("current")`      |
+| 删除CSS样式类           | `$("div").removeClass("current")` | `el.classList.remove("current")`   |
 
-`$("li").hasclass("box")`: 判断li是否有box这个类名，有则返回true，反之false
-
-## 排他思想
+排他思想
 
 ```js
 $("button").click(function(){
@@ -71,26 +93,21 @@ $("button").click(function(){
 })
 ```
 
-`$("div").index()`: 获取索引号
-
 注意：只有div在同一个盒子的时候才有效，也就是亲兄弟
 
-添加CSS样式类: `$("div").addClass("current")`
-删除CSS样式类: `$("div").removeClass("current")`
-切换CSS样式类: `$("div").toggleClass("current")`
-
-链式编程操作
-`$(this).addClass("current").siblings().removeClass("current");`
+链式编程操作: `$(this).addClass("current").siblings().removeClass("current");`
 
 表示：当前元素添加指定类，并且当前元素的所有兄弟节点删除指定类
 
 ## 获取/设置属性值
 
-`$("input").prop("checked")`
-设置属性值
-`$("input").prop("checked"，"你好")`
-获取自定义属性值
-`$("checked").attr("index")`
+获取索引号: `$("div").index()`
+
+获取/设置属性值:`$("input").prop("checked")`：
+
+设置属性值:`$("input").prop("checked"，true)`：
+
+获取自定义属性值:`$("checked").attr("index")`
 设置属性值: `$("input").attr("index"，"1")`
 
 获取被选中的复选框个数(用于购物车) : `$("checkbox:checked").length`
@@ -98,15 +115,12 @@ $("button").click(function(){
 获取/修改元素内的内容，与innerHTML一致 : `$("div").html()`
 设置元素内的内容 : `$("div").html("123")`
 
-获取/修改元素文本内容，与innerText一致
-`$("div").text()`
-设置元素内的内容
-`$("div").text("123")`
+获取/修改元素文本内容，与innerText一致: `$("div").text()`
+设置元素内的内容: `$("div").text("123")`
 
-获取/修改表单值
-`$("input").val()`
+获取表单值: `$("input").val()`
 
-`$("input").val("123")`
+修改表单值: `$("input").val("123")`
 
 ## 遍历元素
 
@@ -128,23 +142,27 @@ $.each(arr，function(i，d){
 
 ## 创建添加删除元素
 
-内部添加
+### 内部添加
+
 `var li = $("<li></li>")`
-`$("ul").append(li)`：追加到后面
-`$("ul").prepend(li)`：添加到前面
-外部添加
+`$("ul").append(li)`：追加到*后面*
+`$("ul").prepend(li)`：添加到*前面*
+
+### 外部添加
+
 `var div = $("<div></div>")`
 `$("ul").after(div)`：放在上面ul标签的后面
 
 `$("ul").before(div)`：放在上面ul标签的前面
 
-删除元素
+### 删除元素
+
 `$("ul").remove()`：删除自身
 `$("ul").emptr()`：清空自己的子节点
 
 `$("ul").html("")`：清空自己的子节点，同上
 
-鼠标事件
+### 鼠标事件
 
 ```js
 $("div").mouseup(function(){
@@ -152,7 +170,8 @@ $("div").mouseup(function(){
 })
 ```
 
-事件注册on()
+### 事件注册on()
+
 (只适用于一个元素同时添加多个事件)
 
 ```js
@@ -183,11 +202,8 @@ $("ul").on("click"，"li"，function(){
 })
 ```
 
-事件解绑
-`$("div").off()`：如果括号内为空，会解除所有事件，如果里面为off("click")，则接触点击事件
-解除事件委托
-
-`$("ul").off("click"，"li")`：事件委托括号内是什么样子，解除事件委托括号内就是什么样子
+事件解绑: `$("div").off()`（如果括号内为空，会*解除所有*事件，如果里面为off("click")，则*只解除*点击事件）
+解除事件委托：`$("ul").off("click"，"li")`（事件委托括号内是什么样子，解除事件委托括号内就是什么样子）
 
 只触发一次事件
 
@@ -246,7 +262,7 @@ msg:{
 多库共存
 > 如果jQuery的`$`与其他库冲突，则可以使用`jQuery`来代替`$​`，如`jQuery("div")`，
 >
-> 也可以自定义，`var alt = jQuery.noConflict()`，就可以直接`alt("div")`了
+> 也可以自定义，`var alt = jQuery.noConflict()`，就可以直接以`alt`为命名使用了（`alt("div")`）
 
 ### 图片懒加载
 
