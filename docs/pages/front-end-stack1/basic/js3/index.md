@@ -1,5 +1,7 @@
 # 异步JavaScript
 
+![f632fc37f9833fa2374ff68d76c54d4](./index.assets/f632fc37f9833fa2374ff68d76c54d4.jpg)
+
 ## JS事务循环
 
 JS引擎是一个基于事件驱动的单线程执行模型。所有的任务可以分为同步和异步两种。
@@ -173,14 +175,16 @@ cusTimer(fn1,1000)
 > - 回调函数必须执行
 > - 回到函数第一个参数代表 err 信息，第二个参数代表成功返回的结果
 
-## Promise.resolve()，Promise.reject()
+## `Promise.resolve()`
+
+## `Promise.reject()`
 
 > 用`Promise.resolve()`直接生成一个已解决的Promise
 >
 > 用`Promise.reject()`直接生成一个已失败的Promise
 >
 
-## Promise.all()
+## `Promise.all()`
 
 > 同时处理多个Promise对象，==全部成功==时返回成功状态的*结果数组*，==至少一个失败==时返回失败时的*单独结果*
 >
@@ -198,7 +202,7 @@ Promise.all([cusTimer(1,3000),cusTimer(2,4000),cusTimer(3,2000)]).then(res=>{
 }); //返回[1,2,3]
 ```
 
-## Promise.allSettled()
+## `Promise.allSettled()`
 
 > 即使全部异常，也会正常返回对应异常状态
 
@@ -215,7 +219,7 @@ Promise.allSettled([A(), B(), C()])
 */
 ```
 
-## Promise.any()
+## `Promise.any()`
 
 > 只要有一个请求成功 就会返回第一个请求成功的
 >
@@ -229,7 +233,7 @@ Promise.any([A(), B(), C()])
     .catch(err => console.log('错误：',err));
 ```
 
-## Promise.race()
+## `Promise.race()`
 
 > 可以检测页面中某个请求是否超时，并输出相关的提示信息。
 >
@@ -248,7 +252,7 @@ Promise.race([p1,p2,p3,...]).then(
 
 ## 异步函数
 
-### async, await
+### `async, await`
 
 **async**：声明异步函数，保证函数返回值是Promise对象(async函数调用后还是可以在后面接then等后续操作的)
 
@@ -366,7 +370,7 @@ async function fn() {
 fn();
 ```
 
-## for await ... of ...
+## `for await ... of ...`
 
 我们可以用ES9新出的`for await ... of ...`遍历语法进行对于*Promise数组的异步遍历*
 
