@@ -1,3 +1,39 @@
+## JS动画
+
+> JS动画无非是到什么时间点做什么事。即要掌控好transition时间段并在确定时间点改变什么样式。
+>
+> 时间点即关键帧，关键帧里头就把相关状态给设置好，剩下的交给CSS。
+>
+> 以下是直接用回调函数来进行的，也可以用现在的异步JS规范赖优化它。
+
+```css
+.el{
+    transition: all .3s
+}
+```
+
+`xxx.JS`
+
+```js
+el.style.opacity = 0 
+setTimeout(() => { //过渡完成后再执行
+    el.style.fontSize = '.8rem'
+    el.innerHTML = "复制成功！"
+    el.style.opacity = 1
+    setTimeout(() => {  
+        el.style.opacity = 0
+        setTimeout(() => { //过渡完成后再执行
+            el.style.fontSize = '1rem'
+            el.innerHTML = this.rawHex(this.color)
+            el.style.opacity = 1
+        }, 300)
+    }, 1000)
+}, 300)
+//时间线：
+// 过渡：     a|  =300ms=>  | b |   =300ms=>   | c |   =700ms=>    | d | =300ms> | e 
+// 定时器：            300ms_↑           1000ms_↑              300ms_↑
+```
+
 ## HTML5跨域通信
 
 ![如何在HTML5中进行跨域通信（Cross Doc...](index.assets/cdm.png)
