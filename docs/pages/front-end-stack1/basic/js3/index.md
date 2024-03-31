@@ -351,7 +351,31 @@ async function test(){
 }
 ```
 
+### 顶行`await`
+
+ES2022提案，使得`await`在`async`函数外也可以使用，适用于专门用来请求数据的JS模块。
+
+```js
+// import() 方法加载
+const strings = await import(`/i18n/${navigator.language}`);
+// 数据库操作
+const connection = await dbConnector();
+// 依赖回滚
+let jQuery;
+try {
+  jQuery = await import('https://cdn-a.com/jQuery');
+} catch {
+  jQuery = await import('https://cdn-b.com/jQuery');
+}
+```
+
 ## 循环异步请求
+
+里面的`Promise`执行并不是并行的，要使得`Promise`并行运行，则请参考[`Promise.all()`](#Promise.all())。
+
+下面的两个方法都可以达到相同目的：
+
+### 在for循环当中使用`await`
 
 ```js
 function print() {
@@ -370,9 +394,9 @@ async function fn() {
 fn();
 ```
 
-## `for await ... of ...`
+### `for await ... of ...`
 
-我们可以用ES9新出的`for await ... of ...`遍历语法进行对于*Promise数组的异步遍历*
+我们可以用ES9新出的`for await ... of ...`遍历语法进行*Promise循环异步遍历*
 
 ```js
 function TimeOut(time) {
@@ -402,3 +426,4 @@ async onMounted(){
     // ...
 }
 ```
+

@@ -2,6 +2,22 @@
 
 <img src="./index.assets/0100a3d008c5c000_2022-12-03_22-52-25-074-1711543982813-1.png" alt="0100a3d008c5c000_2022-12-03_22-52-25-074" />
 
+## CSS属性顺序规范
+
+样式属性的书写顺序对网页加载代码的影响，按照属性顺序规范书写样式不仅易于查看，并且也属于CSS样式优化的一种方式。
+
+> **各种类型属性的书写顺序**
+>
+> 1. 定位属性：position display float left top right bottom overflow clear z-index
+> 2. 自身属性：width height padding border margin background
+> 3. 文字样式：font-family font-size font-style font-weight font-variant color
+> 4. 文本属性：text-align vertical-align text-wrap text-transform text-indent text-decoration letter-spacing word-spacing white-space text-overflow line-height
+> 5. css3中新增属性：content box-shadow border-radius transform……
+
+**书写顺序的作用**：减少浏览器回流，提升浏览器渲染Dom的性能。
+
+![img](./index.assets/1RYMDPwcVjiZDbOJy4hfYmw.png)
+
 ## CSS新伪类选择器
 
 1. `:is()`：将里面的所有元素类似分解因式似的压缩到一起，可以看成是并集运算符的简写法
@@ -36,9 +52,11 @@ div:has(.highlight) {
 }
 ```
 
-## BFC
+## BFC块格式化上下文
 
 > 全称Block formatting context（块格式化上下文），BFC属于标准流，作为一个*布局独立*的块元素
+>
+> 它是块级盒布局出现的区域，也是浮动层元素进行交互的区域。
 >
 > 触发条件：
 >
@@ -60,6 +78,7 @@ BFC作用：
 
 1. 阻止 [外边距重叠](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing)
 2. 包含内部浮动，排除外部浮动
+3. 解决高度塌陷问题
 
 ## Flex弹性盒子
 
@@ -125,7 +144,9 @@ BFC作用：
 
 **order**
 
-可以为子元素安排次序。一般元素的order值为0，有order值且值大于其他有order值的元素会排在order值第二大的元素的右边。对于无order值的，正值会使值在右边排列，负值会在左边排列。此属性在下面的==grid布局中也适用==·。
+可以为子元素安排次序。一般元素的order值为0，有order值且值大于其他有order值的元素会排在order值第二大的元素的右边。
+
+对于无order值的，正值会使值在右边排列，负值会在左边排列。此属性在下面的==grid布局中也适用==·。
 
 下面用*FLEXBOX FROGGY*游戏来展示order值的功能，其中绿青蛙无order值。
 
@@ -135,14 +156,18 @@ BFC作用：
 | `order: -1;`   | <img src="./index.assets/image-20220904203001441.png" alt="image-20220904203001441" style="zoom:80%;" /> |
 | `order: 1;`    | <img src="./index.assets/image-20220904203055233.png" alt="image-20220904203055233" style="zoom:80%;" /> |
 
+**align-self** : 允许单个项目有与其他项目不一样的对齐方式，可覆盖`align-items`属性。
+
+默认值为`auto`，表示继承父元素的`align-items`属性，如果没有父元素，则等同于`stretch`。
+
 **分配剩余空间**
 
-|    属性     |                        可能值                        | 释义                                                         |
-| :---------: | :--------------------------------------------------: | :----------------------------------------------------------- |
-| flex-basis  |              长度值（px, em等）或百分比              | 定义了在分配多余空间之前，项目占据的主轴空间（main size）。<br />它设置项目的初始大小。 |
-|  flex-grow  |             数字（默认值为0，即不增长）              | 定义项目的放大比例，它决定了当有多余空间时，项目将如何分配这些空间。<br />如果所有项目的flex-grow都设置为1，则它们将等比例地占据剩余空间。 |
-| flex-shrink |            数字（默认值为1，即可以缩小）             | 定义项目的缩小比例，它决定了当空间不足时，项目将如何缩小。<br />如果所有项目的flex-shrink都设置为1，则它们将等比例地缩小以适应容器。 |
-|    flex     | 简写属性，用于设置flex-grow, flex-shrink和flex-basis | 它允许你同时设置三个属性。其值可以是以下三种形式之一：<br />1) 一个无单位数（flex-grow），<br />2) 一个长度或百分比（flex-basis），<br />3) 一个无单位数，一个长度或百分比和一个无单位数（分别对应flex-grow, flex-basis和flex-shrink）。<br />例如：`flex: 1 1 auto;` 表示flex-grow为1，flex-shrink为1，flex-basis为auto。 |
+|     属性      |                           可能值                           | 释义                                                         |
+| :-----------: | :--------------------------------------------------------: | :----------------------------------------------------------- |
+| `flex-basis`  |                 长度值（px, em等）或百分比                 | 定义了在分配多余空间之前，项目占据的主轴空间（main size）。<br />它设置项目的初始大小。 |
+|  `flex-grow`  |                数字（默认值为0，即不增长）                 | 定义项目的放大比例，它决定了当有多余空间时，项目将如何分配这些空间。<br />如果所有项目的flex-grow都设置为1，则它们将等比例地占据剩余空间。 |
+| `flex-shrink` |               数字（默认值为1，即可以缩小）                | 定义项目的缩小比例，它决定了当空间不足时，项目将如何缩小。<br />如果所有项目的`flex-shrink`都设置为1，则它们将等比例地缩小以适应容器。 |
+|    `flex`     | 简写属性，用于设置`flex-grow`, `flex-shrink`和`flex-basis` | 它允许你同时设置三个属性。其值可以是以下三种形式之一：<br />1) 一个无单位数（flex-grow），<br />2) 一个长度或百分比（flex-basis），<br />3) 一个无单位数，一个长度或百分比和一个无单位数（分别对应flex-grow, flex-basis和flex-shrink）。<br />例如：`flex: 1 1 auto;` 表示flex-grow为1，flex-shrink为1，flex-basis为auto。 |
 
 ##  Grid弹性布局
 
@@ -534,11 +559,11 @@ transition-delay: 属性值; /*过渡的开始时间*/
 
 **建立3D环境**
 
-| 属性               | 描述                                         | 值                            |
-| ------------------ | -------------------------------------------- | ----------------------------- |
-| perspective        | 观察者与 z=0 平面的距离                      | XXpx                          |
-| perspective-origin | 观察者的位置，用作 perspective属性的消失点。 | 略                            |
-| transform-style    | 设置元素的子元素是位于 3D 空间中还是平面中   | `flat`：<br />`preserve-3d`： |
+| 属性               | 描述                                        | 值                                                   |
+| :----------------- | :------------------------------------------ | :--------------------------------------------------- |
+| perspective        | 观察者与 z=0 平面的距离                     | 长度值,无单位表示像素值,可以使用 `perspective()`函数 |
+| perspective-origin | 观察者的位置,用作 perspective属性的消失点。 | `x-axis y-axis?` 默认值为 `center center`            |
+| transform-style    | 设置元素的子元素是位于 3D 空间中还是平面中  | `flat` | `preserve-3d`,默认值为 `flat`               |
 
 <img src="./index.assets/image-20220815123739909.png" alt="" style="zoom:47%;" />
 
@@ -707,7 +732,7 @@ div.banner{
 | min-height  | 定义输出设备中的页面最小可见区域高度                         |
 | orientation | 视口（viewport）的旋转方向。portrait ：表示 viewport 处于纵向，即高度大于等于宽度 ； landscape ：表示 viewport 处于横向，即宽度大于高度 |
 
-`media feature` 参考：`https://developer.mozilla.org/zh-CN/docs/Web/CSS/Media_Queries/Using_media_queries`。
+`media feature` 参考：[Media_Queries](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Media_Queries/Using_media_queries)
 
 **2. 针对不同的媒体设备，从外部链入不同的 stylesheets（外部样式表）**
 

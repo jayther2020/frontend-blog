@@ -8,7 +8,7 @@ const basicSidebar = [
         link: "/pages/front-end-stack1/basic/html/"
       },
       {
-        text: "CSS",
+        text: "CSS知识",
         link: "/pages/front-end-stack1/basic/css1/"
       },
       {
@@ -39,6 +39,10 @@ const basicSidebar = [
         text: "网络请求",
         link: "/pages/front-end-stack1/basic/js4/"
       },
+      {
+        text: "文件处理",
+        link: "/pages/front-end-stack1/basic/js5/"
+      },
     ]
   },
   {
@@ -53,10 +57,10 @@ const basicSidebar = [
         text: "jQuery",
         link: "/pages/front-end-stack1/tools/jquery/",
       },
-      {
-        text: "Bootstrap",
-        link: "/pages/front-end-stack1/tools/bootstrap/",
-      },
+      // {
+      //   text: "Bootstrap",
+      //   link: "/pages/front-end-stack1/tools/bootstrap/",
+      // },
       // {
       //   text: "其他前端工具索引",
       //   link: "/pages/front-end-stack1/tools/frontend-tooldex/",
@@ -152,29 +156,29 @@ const usefulToolsSidebar = [
     items: [
       {
         text: "代码片段",
-        link: "/pages/useful/snippets"
+        link: "/pages/useful/snippets/"
       },
-      {
-        text: "Swiss工具库",
-        link: "/pages/useful/swiss"
-      },
+      // {
+      //   text: "Swiss工具库",
+      //   link: "/pages/useful/swiss/"
+      // },
     ]
   },
   
-  {
-    text: "前端学习",
-    collapsible: true,
-    items: [
-      {
-        text: "官方文档",
-        link: "/pages/useful/docs"
-      },
-      {
-        text: "演练操场",
-        link: "/pages/useful/playground"
-      },
-    ]
-  },
+  // {
+  //   text: "前端学习",
+  //   collapsible: true,
+  //   items: [
+  //     {
+  //       text: "官方文档",
+  //       link: "/pages/useful/docs/"
+  //     },
+  //     {
+  //       text: "演练操场",
+  //       link: "/pages/useful/playground/"
+  //     },
+  //   ]
+  // },
 
   // {
   //   text: "其他前端工具索引",

@@ -136,7 +136,7 @@ body {
 | `:last-of-type`   | `ul li:last-of-type`会匹配ul中最后一个li                     | 匹配众多与指定元素同类的最后一个     |
 | `:only-of-type`   | `article p:only-of-type`会匹配article中唯一的段落p           | 匹配众多与指定元素同类的唯一一个     |
 
-### 权重（优先级）
+## 权重（优先级）
 
 > 1. 后面的样式会覆盖前面相同的样式
 >
@@ -334,7 +334,7 @@ background-repeat: repeat1, repeat2, ..., repeatN;
 
 > background属性简写 属性值顺序：
 >
-> background-color，background-image，background-repeat，background-attachment，background-position,background-size。
+> background-color，background-image，background-repeat，background-attachment，background-position，background-size。
 
 ## 盒模型
 
@@ -398,7 +398,7 @@ margin 属性是用来设置元素的外边距的。
 margin: 上边距 右边距 下边距 左边距;
 ```
 
-从上面的内容，我们可以看出 margin 属性是个复合属性，我们可以分开设置上下左右的边距，写法如下：
+从上面的内容，我们可以看出 margin 属性是个复合属性，我们可以分开设置上下左右的边距。
 
 ```css
 /*上边距*/
@@ -411,9 +411,7 @@ margin-right: 属性值;
 margin-bottom: 属性值;
 ```
 
-`padding` 属性是一个复合属性，代表我们盒子模型中的填充，也就是内容区域外部的空白区域。
-
-其使用格式如下所示：
+`padding` 属性也是一个复合属性，代表我们盒子模型中的填充，也就是内容区域外部的空白区域。
 
 ```css
 padding: 上右下左;
@@ -438,33 +436,12 @@ border: border-width border-style border-color;
 
 border、border-width、border-style、border-color 都是复合属性，我们也可以单独设置某条边框的样式。
 
-例如，border-color 可以写成：
-
-```css
-border-top-color: 上边框颜色;
-border-right-color: 右边框颜色;
-border-bottom-color: 下边框颜色;
-border-left-color: 左边框颜色;
-```
-
 在 CSS3 中，使用 `border-radius` 属性来设置圆角边框。
 
-`border-radius` 属性的值表示圆角的直径，可以设置四个值，其值的顺序为：左上角，右上角，右下角，左下角。
-
-其语法格式为：
+`border-radius` 属性的值表示圆角的直径，可以设置四个值，其值的顺序也为顺时针顺序。
 
 ```css
-border-radius: 取值;
 border-radius: 140px 20px 30px 40px;
-```
-
-我们也可以分开设置四个角的属性值，语法如下所示：
-
-```css
-border-top-left-radius: 取值;
-border-top-right-radius: 取值;
-border-bottom-right-radius: 取值;
-border-bottom-left-radius: 取值;
 ```
 
 ![图片描述](./index.assets/uid1347963-20210324-1616580578515.png)

@@ -229,11 +229,9 @@ search.addEventListener("change", () => {
 
 ## Jquery Ajax
 
-### ajax()
+### `ajax()`
 
-是向服务器请求数据的，在方法内部我们可以指定是使用 POST 请求还是使用 GET 请求。在日常开发中 `ajax` 方法是最常用的。
-
-`ajax` 方法的语法格式为：
+是向服务器请求数据的，在方法内部我们可以指定是使用何种请求。
 
 ```js
 $.ajax({ 配置项 });
@@ -254,7 +252,7 @@ $.ajax({ 配置项 });
 | async       | Boolean          | 设置请求方式，当值为 true 时，所有请求为异步请求；当值为 false 时，所有请求为同步请求，默认值为 true。 |
 | cache       | Boolean          | 设置浏览器是否缓存当前页面，当值为 true 时浏览器会缓存该页面，反之不会，默认值为 false。 |
 
-### load() 
+### `load() `
 
 让 AJAX 去请求服务器，并从中获得数据，最后将获得的数据放入到指定的元素中。
 
@@ -272,7 +270,7 @@ $().load(url, data, callback);
 - `status`：服务器响应的状态。
 - `xhr`：XMLHttpRequest 对象。
 
-### get()
+### `get()`
 
 通过 HTTP GET 请求从服务器请求数据。HTTP 是超文本传输协议，它是客户与服务器之间通信的一种协议，HTTP 有一些请求方法，在这些方法中 `GET` 和 `POST` 是最常见的。同学们想了解更多关于 HTTP 的内容，可以阅读 [HTTP 请求方法](https://www.w3school.com.cn/tags/html_ref_httpmethods.asp)。
 
@@ -285,7 +283,7 @@ $.get(url, data, callback(data, status, xhr), dataType);
 - `callback`：是当请求成功时的回调函数，该方法包含三个参数，`data` 是请求的结果数据，`status` 是包含请求的状态，`xhr` 是 `XMLHttpRequest` 对象。
 - `dataType`：是服务器返回的数据格式，如 xml、html、json 等，默认的 jQuery 会智能判断它的类型。
 
-### post()
+### `post()`
 
 ```js
 $.post(url, data, callback(data, textStatus, jqXHR), dataType);
@@ -296,7 +294,7 @@ $.post(url, data, callback(data, textStatus, jqXHR), dataType);
 - `callback`：是当请求成功时的回调函数，该方法包含三个参数，`data` 是请求的结果数据，`textStatus` 是包含请求的状态，`jqXHR` 是 `XMLHttpRequest` 对象。
 - `dataType`：是服务器返回的数据格式，如 xml、html、json 等。
 
-### getJSON()
+### `getJSON()`
 
 在前面我们学了 `ajax` 方法，当我们要向服务器发送一个 GET 请求并获取 JSON 类型的数据时，写法如下：
 
@@ -400,12 +398,13 @@ axios.all([axios({url:"a"}),axios({url:"b"})]).then(
 })
 ```
 
-也可以用[`Promise.all()方法`](#Promise.all())解决。相关知识请参照上文
+也可以用`Promise.all()`方法解决。
 
 ```js
-Promise.all([axios({url:"a"}),axios({url:"b"})]).then(([a,b])=>{
-    console.log(a); console.log(b)
-})
+Promise.all([axios({url:"a"}),axios({url:"b"})])
+    .then(([a,b])=>{
+    	console.log(a); console.log(b)
+	})
 ```
 
 > 注意：若是遇到下面错误，在localhost前面加上http://即可
@@ -423,7 +422,7 @@ axios.post('http://localhost:3000/check',this.obj).then((res)=>{
       })
 
 axios.put('http://localhost:3000/check',this.obj).then((res)=>{
-        console.log('success in pushing data!')
+        console.log('success in updating data!')
         console.log(res);
       })
 
@@ -434,17 +433,16 @@ axios.patch('http://localhost:3000/check',{_2ndfavorite_pm:this.obj._2ndfavorite
 
 **DELETE**
 
-> 有两种json数据的处理方式
->
-> 1.数组类
->
-> 2.对象类
-
+```js
+//获取该学院中或学科中的各级别的期刊数量
+export function expertDelete(subIdList) {
+  return request({
+    url: '/periodical/deletePer',
+    method: 'delete',
+    params: {subIdList},
+  })
+}
 ```
-
-```
-
-
 
 请求配置
 
@@ -540,32 +538,16 @@ axios.interceptors.response.use(
 
 ### 取消请求
 
-在请求内部由`axios.CancelToken`生成句柄，并通过该句柄进行请求取消。
-
-```js
-let cancel;
-
-axios.get('/user/12345', {
-  cancelToken: new axios.CancelToken( function(mainToken){
-    // g函数接收一个 cancel 函数作为参数
-    cancel = mainToken;
-      //在vue项目里
- //   Vue.prototype.$cancelRequest = mainToken
-  })
-});
-
-// 取消请求
-cancel();
-this.$cancelRequest()
-```
-
-另一种方法是使用`axios.CancelToken.source()`来进行请求取消
+在请求内部使用外部`axios.CancelToken.source()`传进的`token`来进行请求取消
 
 ```js
 const source = axios.CancelToken.source();
 
 axios.get('/api/data', {
+     // 函数接收一个 cancel 函数作为参数
   cancelToken: source.token
+    //  在vue项目里
+    //  Vue.prototype.$cancelRequest = source.token
 }).catch(function(thrown) {
   if (axios.isCancel(thrown)) {
     console.log('Request canceled', thrown.message);

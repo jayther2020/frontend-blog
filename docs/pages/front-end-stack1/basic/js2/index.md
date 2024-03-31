@@ -1,6 +1,6 @@
 # JS进阶
 
-<img src="./index.assets/cover.png" alt="DALL·E 2023-03-31 09.04.31 - an endless straght harbor with countless sailboats in dawn, digital art" style="zoom:75%;" />
+<img src="./index.assets/cover.png" alt="DALL·E 2023-03-31 09.04.31 - an endless straght harbor with countless sailboats in dawn, digital art"/>
 
 ## 对象进阶
 
@@ -43,7 +43,7 @@ JS是个*基于原型的语言*。凡是JS的对象都存在其原型。
 >
 > 对于Foo可以指代任何有隐形原型的对象和可转变为相应对象的基本数据类型
 >
-> 如String、Boolean、Bigint等等。Number(`14.__proto__`会报错)、undefined、null除外。
+> 如`String`、`Boolean`、`Bigint`等等。`Number`（如`14.__proto__`会报错）、`undefined`、`null`除外。
 
 <img src="./index.assets/对象，函数原型间的关系new-1697194033900-2.jpg" alt="对象，函数原型间的关系new" style="zoom:67%;" />
 
@@ -235,7 +235,7 @@ report.bind(SDB)();
 类是构造函数的语法糖，类的引入让实例对象的构造更加清晰直观。
 
 ```js
-class atkCard{  //typeof atkCard==='function'返回true
+class atkCard{  //typeof atkCard ==='function'返回true
     type='attack' //类共有属性
     upcount=0   
     constructor(name,hp,atk,range){  //装载每个实例的特异属性
@@ -248,7 +248,7 @@ class atkCard{  //typeof atkCard==='function'返回true
         this.atk+=20
         this.hp+=10
         this.upcount++
-    }                          //属性、方法间别管逗号了！
+    }   //属性、方法间别管逗号了！
 }
 let luna = new atkCard('luna',200,150,30)
 luna.upgrade()
@@ -1186,26 +1186,26 @@ scr.className += "一或多个类名"  //添加指定类名
 
 ### window方法
 
-| 方法    | 描 述                    |
-| ------- | ------------------------ |
-| open()  | 打开一个新的浏览器窗口。 |
-| close() | 关闭浏览器。             |
-| print() | 打印当前窗口内容。       |
+| 方法      | 描 述                    |
+| --------- | ------------------------ |
+| `open()`  | 打开一个新的浏览器窗口。 |
+| `close()` | 关闭浏览器。             |
+| `print()` | 打印当前窗口内容。       |
 
 ### Navigator
 
-userAgent：浏览器的标识，无法修改，可以读取以获得浏览器的相关信息。
+`userAgent`：浏览器的标识，无法修改，可以读取以获得浏览器的相关信息。
 
 ### History
 
 此对象用来操作浏览器向前或向后翻页。
 
-| 属性/方法 | 释义                                                         |
-| --------- | ------------------------------------------------------------ |
-| length    | 当前访问页面的数量                                           |
-| go(x)     | 向前跳转到指定页面，x为正数向前跳转x下，负数为后退x下，0为不跳转 |
-| back()    | 回退到上个页面，与浏览器的后退功能相同                       |
-| forward() | 向前跳转到下个页面，与浏览器的前进功能相同                   |
+| 属性/方法   | 释义                                                         |
+| ----------- | ------------------------------------------------------------ |
+| `length`    | 当前访问页面的数量                                           |
+| `go(x)`     | 向前跳转到指定页面，x为正数向前跳转x下，负数为后退x下，0为不跳转 |
+| `back()`    | 回退到上个页面，与浏览器的后退功能相同                       |
+| `forward()` | 向前跳转到下个页面，与浏览器的前进功能相同                   |
 
 ### Location
 
@@ -1241,11 +1241,9 @@ Location对象装载了关于当前页面的URL的相关信息。
 
 ## cookie与本地存储
 
-cookie值存在客户端
+cookie值存在客户端。通常，浏览器的cookie功能是启用状态。JS通过`document.cookie`来读取cookie。
 
-通常，浏览器的cookie功能是启用状态
-
-js通过document.cookie来读取cookie，不能通过`document.cookie=""`来清除cookie，但可以通过cookie设置失效时间达到客服端删除cookie的作用;
+JS不能通过`document.cookie=""`来清除cookie，但可以通过cookie*设置失效时间*达到客服端删除cookie的作用;
 
 详情点这：[HTML Web Storage API](https://attacomsian.com/blog/web-storage-api-local-storage-session-storage)
 
@@ -1311,60 +1309,6 @@ suggestion.onmouseover = function (e) {
 
 ![img](./index.assets/uid1693782-20210508-1620464758035.jpg)
 
-## HTML5跨域通信
-
-![如何在HTML5中进行跨域通信（Cross Doc...](./index.assets/cdm.png)
-
-> Cross Document Messaging，简称CDM，目前只有一个由另外一个页面打开的页面才有效
-
-Cross Document Messaging在HTML5中的基本工作流程：
-
-1. 建立跨域关系：这是通过在源（发送消息的窗口或文档）中设置`document.domain`属性，在目标（接收消息的窗口或文档）中通过`window.postMessage()`方法接收消息来实现的。注意，这两个窗口或文档必须来自不同的域。
-2. 发送消息：在源文档中，可以使用`window.postMessage()`方法向目标文档发送消息。这个方法接受两个参数，第一个是实际消息（可以是任何类型的数据，如字符串、数字、对象等），第二个是对话类型（可以用来指示消息的来源和目的地）。
-3. 接收消息：在目标文档中，需要设置一个事件监听器来监听来自源文档的消息。这可以通过`window.addEventListener()`方法实现，这个方法接受两个参数，第一个是事件类型（在这里应该是"message"），第二个是处理函数，这个函数会在接收到消息时被调用。
-4. 处理消息：在处理函数中，可以获取到源文档发送的消息，并根据需要对这个消息进行处理。
-
-`useCDMSender.js`
-
-```js
-export const flag = "5C10A7A8A646C42B70ABBCAD984D4097F2359CEF31C1FC407D782A58F305322B"
-export const content = "5D7A81E79896E12D34D0FB9367BBF064ED3F0316F0184BEF0B6E7862384788B1"
-
-export default function (origin, msg) {
-  if (window) {
-    window.addEventListener('message', function (e) {
-      if (e.origin === origin && e.data) {
-        e.source.postMessage({[flag]: true, [content]: msg}, origin)
-      }
-    })
-  }
-}
-
-```
-
-`useCDMReceiver.js`
-
-```js
-import {flag, content} from "./useCDMSender"
-
-export default function (origin) {
-  return new Promise((resolve, reject) => {
-    if (window) {
-      window.addEventListener('load', function (e) {
-        e.currentTarget?.opener 
-          && e.currentTarget.opener.postMessage(true, origin) // 仅限于打开该窗口的窗口
-      })
-      window.addEventListener('message', function (e) {
-        if (e.origin === origin && e.data[flag]) // 会多次响应得到没有用的元素，需要筛选。
-          resolve(e.data[content])
-      })
-    } else {
-      reject(new Error("未找到window对象"))
-    }
-  })
-}
-```
-
 ## Web Workers API
 
 Web Workers专门解决JS的多线程问题。可它也有不足。
@@ -1379,7 +1323,7 @@ Web Workers专门解决JS的多线程问题。可它也有不足。
 
 ```js
 let wkr = new Worker("./path/to/work.js")
-let i=1
+let i = 1
 wkr.postMessage(i) //发送消息
 wkr.onmessage = function(e){ //接收消息后怎么操作
     document.write(e.data)
