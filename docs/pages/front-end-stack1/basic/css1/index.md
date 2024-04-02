@@ -102,26 +102,26 @@ body {
 >
 > **链接伪类选择器的优先级**：L->V->H->A。可以记作**LoVe HAte**（爱恨）
 
-| 选择器写法 | 释义                  | 权重                                                         |
-| ---------- | --------------------- | ------------------------------------------------------------ |
-| a:hover    | 悬浮在锚a时的样式     | 伪元素本身10，合起来11![image-20220810202049526](./index.assets/image-20220810202049526.png) |
-| a:visited  | 锚a被访问时的样式     | 本身10                                                       |
-| a:active   | 点击悬浮在锚a时的样式 | 本身10                                                       |
-| a:link     | 锚a时的默认样式       | 本身10                                                       |
+| 选择器写法  | 释义                  | 权重                                                         |
+| ----------- | --------------------- | ------------------------------------------------------------ |
+| `a:hover`   | 悬浮在锚a时的样式     | 伪元素本身10，合起来11![image-20220810202049526](./index.assets/image-20220810202049526.png) |
+| `a:visited` | 锚a被访问时的样式     | 本身10                                                       |
+| `a:active`  | 点击悬浮在锚a时的样式 | 本身10                                                       |
+| `a:link`    | 锚a时的默认样式       | 本身10                                                       |
 
 ### UI伪类选择器
 
-| 选择器      | 描述                                                         |
-| ----------- | ------------------------------------------------------------ |
-| :focus      | 给获取焦点的元素设置样式。![image-20220810202612045](./index.assets/image-20220810202612045.png) |
-| :selection  | 给页面中被选中的文本内容设置样式。                           |
-| :checked    | 给被选中的单选框或者复选框设置样式。                         |
-| :enabled    | 给可用的表单设置样式。                                       |
-| :disabled   | 给不可用的表单设置样式。                                     |
-| :read-only  | 给只读表单设置样式。                                         |
-| :read-write | 给可读写的表单元素设置样式。                                 |
-| :valid      | 验证有效。                                                   |
-| :invalid    | 验证无效。                                                   |
+| 选择器        | 描述                                                         |
+| ------------- | ------------------------------------------------------------ |
+| `:focus`      | 给获取焦点的元素设置样式。![image-20220810202612045](./index.assets/image-20220810202612045.png) |
+| `:selection`  | 给页面中被选中的文本内容设置样式。                           |
+| `:checked`    | 给被选中的单选框或者复选框设置样式。                         |
+| `:enabled`    | 给可用的表单设置样式。                                       |
+| `:disabled`   | 给不可用的表单设置样式。                                     |
+| `:read-only`  | 给只读表单设置样式。                                         |
+| `:read-write` | 给可读写的表单元素设置样式。                                 |
+| `:valid`      | 验证有效。                                                   |
+| `:invalid`    | 验证无效。                                                   |
 
 当你想要定位*多个相同元素中的某个*时，你可能会需要以下伪类：
 
@@ -146,9 +146,9 @@ body {
 >
 > 3. 各基本选择器的样式的权重如下，复合选择器时下述选择器的权重之和
 >
->    - !important：10000
+>    - `!important`：10000
 >
->    - 内联样式：1000
+>    - 内联样式 (`style=""`)：1000
 >
 >    - id选择器：100
 >
@@ -156,7 +156,7 @@ body {
 >
 >    - 元素选择器、伪元素：1
 >
->    - 通配符选择器：0
+>    - 通配符选择器、直接子代元素选择器、兄弟选择器、`:where()`、继承样式：0
 
 ## 颜色
 
@@ -195,7 +195,7 @@ body {
 | color           | color                                                        | 文字的颜色                         |
 | line-height     | normal、number、length、%                                    | 行高                               |
 | text-indent     | length、%                                                    | 文本缩进，`2em`:缩进两格           |
-| text-align      | left、right、center、justify、start、end                     | 对齐方式                           |
+| text-align      | left（左对齐）、right（右对齐）、center（居中对齐）、justify（两边对齐）、start（左对齐）、end（右对齐） | 对齐方式                           |
 | letter-spacing  | normal、length                                               | 字符间距                           |
 | text-decoration | line、color、style、thickness                                | 文本修饰                           |
 | text-transform  | `none`, `uppercase`: 转为大写 <br />`lowercase`: 转为小写<br />`capitalize`: 首字母大写。<br />`full-width` | 文字转换                           |
@@ -226,21 +226,11 @@ body {
 
 ```css
 /**** html: p.item${太阳只穿一件朴素的光衣，白云却披了灿烂的裙裾。}*5 *****/
-.item1 {
-    text-decoration: underline lime; /*下划线直线*/
-}
-.item2 {
-    text-decoration: wavy overline lime; /*上划线波浪线*/
-}
-.item3 {
-    text-decoration: line-through lime; /*中划线*/
-}
-.item4 {
-    text-decoration: none; /*无样式*/
-}
-.item5 {
-    text-decoration: dashed underline overline lime 5px; /*圆点上划线和下划线*/
-}
+.item1 { text-decoration: underline lime; /*下划线直线*/}
+.item2 { text-decoration: wavy overline lime; /*上划线波浪线*/}
+.item3 { text-decoration: line-through lime; /*中划线*/}
+.item4 { text-decoration: none; /*无样式*/}
+.item5 { text-decoration: dashed underline overline lime 5px; /*圆点上划线和下划线*/}
 ```
 
 <img src="././index.assets/1b5ce262a33ed291cd1217acfe4b2241-0.png" alt="图片描述" style="zoom:50%;" />
@@ -296,7 +286,7 @@ p.some-font{
 
 ### 背景大小
 
-`background-size` 属性可以用来控制背景图像的显示大小。语法如下：
+`background-size` 属性可以用来控制背景图像的显示大小。
 
 ```css
 background-size: length|percentage|cover|contain;
@@ -311,21 +301,21 @@ background-size: length|percentage|cover|contain;
 
 ### 多个背景
 
-background-image 属性的属性值可以包含多个图片的地址。语法如下：
+background-image 属性的属性值可以包含多个图片的地址。
 
 ```css
 /*图片地址*/
 background-image: url(), url(), ..., url();
 ```
 
-可以使用 background-position 属性设置图片显示的位置。语法如下：
+可以使用 background-position 属性设置图片显示的位置。
 
 ```css
 /*图片显示的位置*/
 background-position: position1, position2, ..., positionN;
 ```
 
-我们可以添加 background-repeat 属性设置图片是否重复显示在页面上。语法如下：
+我们可以添加 background-repeat 属性设置图片是否重复显示在页面上。
 
 ```css
 /*图片是否重复*/
@@ -338,8 +328,6 @@ background-repeat: repeat1, repeat2, ..., repeatN;
 
 ## 盒模型
 
-### 总体概览
-
 > 盒子模型是CSS的基石，指定标签如何显示；页面上的每个元素都被当成一个矩形盒子，占据一定的页面空间，
 >
 > 块级元素都遵从盒模型，且由盒模型的四个组成成分来组成整个元素的显示。这四个部分分别是：
@@ -349,29 +337,42 @@ background-repeat: repeat1, repeat2, ..., repeatN;
 > 3. 内边距`padding`
 > 4. 内容`content`(长宽分别用`width`,`height`控制)
 
-![image-20220830094707612](./index.assets/image-20220830094707612.png)
+| 盒模型在浏览器的体现                                         | 盒模型分解                                                   |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![image-20220830094707612](./index.assets/image-20220830094707612.png) | <img src="./index.assets/b84aeade8af398af16ce554fcba17841-0.png" alt="img" style="zoom:50%;" /> |
 
-| 区域   | 功能                                                         |
-| ------ | ------------------------------------------------------------ |
-| 内容   | 内容区在模型的中心包含了盒子内的信息也就是 HTML 元素。这些元素可以是文本、图片等。 |
-| 内边距 | 内边距是内容区和边框之间的空间，可以被看作是内容区的背景区域。 |
-| 边框   | 边框用于标识盒子的边界，介于内边距和外边距之间。             |
-| 外边距 | 外边距位于边框外部，是边框与周围之间的空间。                 |
+| 区域   | 英文名  | 功能                                                         |
+| ------ | ------- | ------------------------------------------------------------ |
+| 内容   | content | 内容区在模型的中心包含了盒子内的信息也就是 HTML 元素。这些元素可以是文本、图片等。 |
+| 内边距 | padding | 内边距是内容区和边框之间的空间，可以被看作是内容区的背景区域。 |
+| 边框   | border  | 边框用于标识盒子的边界，介于内边距和外边距之间。             |
+| 外边距 | margin  | 外边距位于边框外部，是边框与周围之间的空间。                 |
 
-> 1. 内容(Content)):盒子里面所装的内容，
-> 2. 内边距（填充，padding):内容到边界之间的距离；
-> 3. 边框(border):盒子本身；
-> 4. 外边距（空白边，margin):与其他盒子之间的距离；
+> 1. 默认情况下，盒子无边框，padding和margin也都无法看到（只能看到它们对元素的影响），背景色是透明的，所以看不到盒子。
+> 2. 边框border默认值为0无宽度但不代表不显示，0宽度的border照样会使用渲染资源。
+> 3. margin可以设负值，意义是在元素在反方向上进行距离伸展。而padding不可以；
+> 4. margin、padding、border的四值缩写设置都是按照顺时针记法，即上右下左的方式进行设置的。单值、双值意义如下：
 >
-> 默认情况下，盒子边框是无，背景色是透明的，所以，看不到盒子
+> ```css
+> /* 比如： */
+> margin: 上边距 右边距 下边距 左边距;
+> /* 等价于： */
+> margin-top: 属性值;  /*上边距*/
+> margin-left: 属性值;  /*左边距*/
+> margin-right: 属性值;  /*右边距*/
+> margin-bottom: 属性值;  /*下边距*/
+> 
+> /* 单值缩写 */
+> margin: 上下左右边距;
+> /* 两值缩写 */
+> margin: 上下边距 左右边距;
+> ```
 
-### 各成分介绍
-
-<img src="./index.assets/b84aeade8af398af16ce554fcba17841-0.png" alt="img" style="zoom:50%;" />
+### margin叠加
 
 > 发生嵌套时，若未设父元素的边框和填充，父元素的上下margin会和子元素的上下margin发生叠加。
 >
-> 若父元素的边框或填充不为0，不存在叠加的问题
+> 若父元素的边框或填充不为0，不存在叠加的问题。
 >
 > 只有标准文档流中 块元素的垂直外边距才会发生外边距合并。行内框、浮动框或绝对定位之间的外边距不会合并。
 >
@@ -380,65 +381,29 @@ background-repeat: repeat1, repeat2, ..., repeatN;
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | ![image-20231021203338921](./index.assets/image-20231021203338921.png) | ![image-20231021180105372](./index.assets/image-20231021180105372.png) |
 
-关于盒模型，注意一下几点：
+### `border`和`outline`
 
-1、边框border默认值为0，即无宽度（不代表不显示），而padding和margin都无法看到，只能看到它们对元素的影响；
+`border` 属性用于设置元素的边框属性，而`outline`属性用于设置元素的轮廓属性。其默认值都为`none`。
 
-2、margin可以设负值，而padding不可以；
-
-3、行内元素如a ,span,img,input等,高度宽度设置无效的，其宽度就是自身文字或者图片的宽度；定义上下外边距不影响行高。
-
-4、大部分html元素的margin,padding默认值为0，但有少数元素的浏览器默认值不为0，例如:body,p,ul,li,form标记等，有必要先设置为0；
-
-margin 属性是用来设置元素的外边距的。
-
-其使用格式如下（顺时针记法）：
-
-```css
-margin: 上边距 右边距 下边距 左边距;
-```
-
-从上面的内容，我们可以看出 margin 属性是个复合属性，我们可以分开设置上下左右的边距。
-
-```css
-/*上边距*/
-margin-top: 属性值;
-/*左边距*/
-margin-left: 属性值;
-/*右边距*/
-margin-right: 属性值;
-/*下边距*/
-margin-bottom: 属性值;
-```
-
-`padding` 属性也是一个复合属性，代表我们盒子模型中的填充，也就是内容区域外部的空白区域。
-
-```css
-padding: 上右下左;
-
-padding-top: 顶部填充值;
-padding-left: 左边填充值;
-padding-right: 右边填充值;
-padding-bottom: 底部填充值;
-```
-
-`border` 属性用于设置元素的边框属性，其用法如下所示：
+其中`border-width`, `border-style` ,`border-color`的值指定情况和margin一样（顺时针记法）。
 
 ```css
 border: border-width border-style border-color;
+outline: outline-width outline-style outline-color;
 ```
 
-属性值说明如下：
+> border 和 outline 很类似，但有如下区别：
+>
+> - outline 不占据空间，绘制于元素内容周围。
+> - 根据规范，outline 通常是矩形，但也可以是非矩形的。
 
-- `border-width`：是边框宽度，宽度一般用数值即可。
-- `border-style`：是边框线的样式，一般有 solid（实线）、dotted（圆点）、dashed（虚线）、double（双横线）。
-- `border-color`：是边框线的颜色。
+| `border-style`                                               | `border-width`                                               |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![image-20240402104913158](./index.assets/image-20240402104913158.png) | ![image-20240401184719377](./index.assets/image-20240401184719377.png) |
 
-border、border-width、border-style、border-color 都是复合属性，我们也可以单独设置某条边框的样式。
+### `border-radius`
 
-在 CSS3 中，使用 `border-radius` 属性来设置圆角边框。
-
-`border-radius` 属性的值表示圆角的直径，可以设置四个值，其值的顺序也为顺时针顺序。
+使用 `border-radius` 属性来设置圆角边框。可以设置四个值，其值的顺序也为顺时针顺序（左上、右上、右下、左下）。
 
 ```css
 border-radius: 140px 20px 30px 40px;
@@ -526,9 +491,7 @@ border-radius: 140px 20px 30px 40px;
 
 ### vertical-align
 
-`vertical-align`属性：用于设置一个元素的垂直对齐方式，但是它只针对于行内元素或者行内块元素有效。
-
-经常用于设置图片或者表单（行内块元素）和文字垂直对齐。
+用于设置元素的垂直对齐方式，但是它只针对于行内元素或者行内块元素有效。经常用于*设置图片或者表单（行内块元素）和文字垂直对齐*。
 
 ![image-20220830222721497](./index.assets/image-20220830222721497.png)
 语法：`vertical-align: baseline | top | middle | bottom;`
@@ -546,26 +509,28 @@ border-radius: 140px 20px 30px 40px;
 
 ### 文档流
 
-就是文档的默认布局方式：元素按照其在HTL中的先后位置至上而下布局，行内元素水平排列，直到当行被占满然后换行，块级元素则会被渲染为完整的一个新行。所有元素==默认==都是普通流定位
+> 元素按照其在HTML中的先后顺序至上而下布局
+>
+> 行内元素水平排列，直到当行被占满然后换行，块级元素则会被渲染为完整的一个新行。
+
+这便是文档的默认布局方式。所有元素==默认==都是按照文档流定位。此时`positiion: static;`
 
 ### 定位种类和属性
 
-使用以下定位都可以用`top`，`bottom`，`left`，`right`来进行元素位置改变。
+有定位的元素是除了应用static定位之外的元素，以下定位，都可以用`top`，`bottom`，`left`，`right`来进行元素位置改变。
 
-**相对定位**
+**相对定位 (relative)**
 
-> `position: relative`
+> `position: relative`：相对于自己初始位置定位
 >
-> 相对于自己初始位置定位
->
-> 定位后仍然在标准流，空间不释放，影响兄弟元素
+> 定位后仍然*在标准流*（空间不释放），影响兄弟元素
 
-**绝对定位**
+**绝对定位 (absolute)**
 
 > `position: absolute`
 >
-> 1. 位置相对于最近已定位的祖先元素。如果没有最近已定位的祖先元素相对于body
-> 2. 定位后脱离标准流，空间释放，不影响兄弟元素
+> 1. 位置相对于最近*已定位*的祖先元素。如果没有最近已定位的祖先元素相对于body
+> 2. 定位后*脱离标准流*（空间释放），不影响兄弟元素
 
 #### 子绝父相
 
@@ -574,84 +539,130 @@ border-radius: 140px 20px 30px 40px;
 > 我们要某元素A绝对定位后是相对于另外一个元素B，则我们为父元素添加相对元素即可
 
 ```css
-div.father{
-    position:relative;
+div.father {
+    position: relative;
 }
 
-div.son{
-    position:absolute;
-    left:50%;
-    top:50%;
+div.son {
+    position: absolute;
+    left: 50%;
+    top: 50%;
 }
 ```
 
-**固定定位**
+**固定定位 (fixed)**
 
-> 1. 位置相对可视页面，即使视野移动元素也不会移动
-> 2. 定位后脱离标准流，空间释放，不影响兄弟元素
+> 1. 位置相对*可视页面*，即使视野移动元素也不会移动
+> 2. 定位后*脱离标准流*，空间释放，不影响兄弟元素
 
-**粘性定位**
+**粘性定位 (sticky)**
+
+> 1. 元素所占空间 在可视区域内 时 定位类似`static`（类似普通流无定位的元素）：不脱离文档流（占用空间）。
+>
+> 2. 元素所占空间 在可视区域外 时*对应方向*必需*指定相对距离属性*（left，top等），否则`sticky`定位效果将不起作用（定位也是`static`）
+>
+>    调好后，此时定位类似`fixed`，脱离文档流（不占用空间），位置相对可视页面。
+>
+> 应用：某些网页当中会贴合的header
 
 ### 浮动
 
+> 应用在子元素上，控制其偏移方向，会*脱离标准流*（不占空间）。
+>
 > `float:left;`元素向左边浮动
 >
 > `float:right;`元素向右边浮动
 >
 > `float:none;`元素不浮动（默认）
 >
-> 元素首先按照普通流的位置出现，然后根据浮动的方向尽可能的向左边或右边偏移
+> 浮动元素首先按照普通流的位置出现，然后根据浮动的方向尽可能的向左边或右边偏移。
+>
+> 剩余不浮动的元素会组成新的文档流。
+>
+> ![image-20240401220530999](./index.assets/image-20240401220530999.png)
 
 **浮动应用**
 
 1. 图片文字环绕
 
-```html
-<section>
-    <img src="https://labfile.oss.aliyuncs.com/courses/10532/lotus1.png" />
-    <img src="https://labfile.oss.aliyuncs.com/courses/10532/lotus2.png" />
-    <p>
-        曲曲折折的荷塘上面，弥望的是田田的叶子。叶子出水很高，像亭亭的舞女的裙。层层的叶子中间，零星地点缀着些白花，有袅娜地开着的，有羞涩地打着朵儿的；正如一粒粒的明珠，又如碧天里的星星，又如刚出浴的美人。微风过处，送来缕缕清香，仿佛远处高楼上渺茫的歌声似的。这时候叶子与花也有一丝的颤动，像闪电般，霎时传过荷塘的那边去了。叶子本是肩并肩密密地挨着，这便宛然有了一道凝碧的波痕。叶子底下是脉脉的流水，遮住了，不能见一些颜色；而叶子却更见风致了。
-    </p>
-</section>
-<style>
-    section {
-        border: 1px solid green;
-        width: 400px;
-        float: left;
-    }
-    img {
-        width: 120px;
-        height: 120px;
-    }
-    img:first-child {
-        float: left;
-    }
-    img:last-child {
-        float: right;
-    }
-</style>
+```css
+/* section>img*2+p */
+section {
+    border: 1px solid green;
+    width: 400px;
+    float: left;
+}
+img { width: 120px; height: 120px;}
+img:first-child { float: left;}
+img:last-child { float: right;}
 ```
 
 <img src="./index.assets/e6f82327013012d500328da7bb6705b1-0.png" alt="图片描述" style="zoom:50%;" />
 
 2. 多列文章展示
 
-   
+```css
+.left {
+    float: left;
+    width: 33.3%;
+}
+.right{
+    float: right;
+    width: 33.3%;
+}
+.middle {
+    width: 33.4%;
+}
+```
+
+![image-20240401223009750](./index.assets/image-20240401223009750.png)
 
 **清除浮动**
 
-> 为了解决浮动的”一浮都浮“的弊病，特别有clear属性清除浮动
->
-> `clear:left;`清除左边浮动
->
-> `clear:right;`清除右边浮动
->
-> `clear:both;`清除两边浮动
+![image-20240401221557064](./index.assets/image-20240401221557064.png)
 
-### z-index
+> 一浮都浮：一个元素开始浮动，后续元素都会陆续浮动。
+>
+> 为了解决浮动的*一浮都浮*的弊病，对于子元素，有`clear`属性来清除*子元素所在处*浮动
+>
+> `clear:left;`清除子元素 向左边浮动
+>
+> `clear:right;`清除子元素 右边浮动
+>
+> `clear:both;`清除子元素 两边浮动
+
+```css
+/* 用容器的伪元素清除浮动 */
+.container::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+```
+
+## z-index
 
 > 在元素定位不为static时使用该属性规定层级。不带单位
+>
+> 对于*有定位*的元素，z-index值大的元素会覆盖z-index值较小的元素，而尚*未有定位*的元素*不会覆盖*所有带定位的元素。
+>
+> 对于嵌套的元素来说，当某个元素比另一个元素的z-index值低，则其所有子元素都会被另一个元素覆盖。
+>
+> ```html
+>   <div class="green">
+>     <div class="red"></div>
+>   </div>
+>   <div class="purple"></div>
+> ```
+
+```css
+/* div.green>div.red^div.purple */
+div.green { z-index: 1; }
+div.red { z-index: 100; }
+div.purple { z-index: 2; }
+```
+
+![image-20240401225128617](./index.assets/image-20240401225128617.png)
 
 ## 处理溢出
 
@@ -668,9 +679,8 @@ div.son{
 | hidden  | 隐藏溢出，不显示滚动条     |
 | visible | 不管溢不溢出都显示溢出元素 |
 
-> 尽管有兼容性问题，但是可以使用`overflow-x`和`overflow-y`来分别控制两个垂直方向上的元素溢出问题
+> 尽管有兼容性问题，但是可以使用`overflow-x`和`overflow-y`来分别控制两个垂直方向上的元素溢出问题。用法与`overflow`相同
 >
-> 用法与`overflow`相同
 
 ### 文字溢出
 
@@ -679,8 +689,6 @@ div.son{
 ```css
 text-overflow: clip|ellipsis;
 ```
-
-其属性值的含义如下所示：
 
 | 属性值     | 描述                             |
 | ---------- | -------------------------------- |

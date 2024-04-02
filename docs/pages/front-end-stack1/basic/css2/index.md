@@ -2,6 +2,29 @@
 
 <img src="./index.assets/0100a3d008c5c000_2022-12-03_22-52-25-074-1711543982813-1.png" alt="0100a3d008c5c000_2022-12-03_22-52-25-074" />
 
+## CSS属性的继承
+
+CSS属性继承决定了当你没有为元素的属性指定值时该如何计算值。有一些属性是可以被子元素继承的，而另一些则不可继承。
+
+以下是一些常见的可继承属性和不可继承属性的列表：
+
+**可继承的属性：**
+
+1. *字体相关*：`font-family`，`font-size`，`font-style`，`font-weight`
+2. *文本相关*：`color`，`line-height`，`text-align`，`text-indent`，`text-transform`，`white-space`，`text-decoration`
+3. *列表相关*：`list-style-type`，`list-style-position`，`list-style-image`
+4. *元素显示*：`display`，`visibility`
+5. *表格相关*：`border-collapse`，`border-spacing`，`caption-side`，`empty-cells`，`table-layout`
+6. *其他*：`cursor`
+
+**不可继承的属性：**
+
+1. *布局相关*：`margin`，`padding`，`width`，`height`，`position`，`top`，`right`，`bottom`，`left`，`float`，`clear`，`overflow`，`z-index`
+2. *边框相关*：`border`，`border-width`，`border-style`，`border-color`，`border-radius`，`outline`，`outline-width`，`outline-style`，`outline-color`
+3. *背景相关*：`background`，`background-color`，`background-image`，`background-repeat`，`background-position`，`background-size`，`background-origin`，`background-clip`，`background-attachment`
+4. *文本排版*：`word-spacing`，`letter-spacing`，`text-shadow`，`vertical-align`，`word-wrap`，`word-break`，`hyphens`
+5. *其他*：`box-sizing`，`resize`，`overflow-x`，`overflow-y`
+
 ## CSS属性顺序规范
 
 样式属性的书写顺序对网页加载代码的影响，按照属性顺序规范书写样式不仅易于查看，并且也属于CSS样式优化的一种方式。
@@ -15,8 +38,6 @@
 > 5. css3中新增属性：content box-shadow border-radius transform……
 
 **书写顺序的作用**：减少浏览器回流，提升浏览器渲染Dom的性能。
-
-![img](./index.assets/1RYMDPwcVjiZDbOJy4hfYmw.png)
 
 ## CSS新伪类选择器
 
@@ -61,24 +82,74 @@ div:has(.highlight) {
 > 触发条件：
 >
 > 1. 根元素(\<html>)
->
 > 2. 浮动元素（元素的float不是none)
->
-> 3. 绝对定位元素（元素的position为absolute或fixed)
->
-> 4. display为`inline-block`、`table-cell`、`table-caption`、`table`、`table-row`、`table-row-group`、`table-header-group`、`table-footer-group`、`inline-table`、`flow-root`、`flex`或`inline-flex`、`grid`或`inline-grid`
->
+> 3. 绝对定位、固定定位元素（元素的position为absolute或fixed)
+> 4. display为
+>    * 行内块：`inline-block`
+>    * `table`相关元素类型：`table-cell`、`table-caption`、`table`、`table-row`、`table-row-group`、`table-header-group`、`table-footer-group`、`inline-table`
+>    * 浮动根：`flow-root`（可以明显声明在浮动容器当中）
+>    * flex类：`flex`或`inline-flex`
+>    * grid类：`grid`或`inline-grid`
 > 5. overflow值不为visible，clip的块元素
->
 > 6. contain值为layout、content或paint的元素
->
 > 7. 多列容器（元素的column-count或column-width不为auto,包括column-count为1）
 
-BFC作用：
+### BFC的运行机制
 
-1. 阻止 [外边距重叠](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing)
-2. 包含内部浮动，排除外部浮动
-3. 解决高度塌陷问题
+- 内部的Box会在垂直方向上一个接一个的放置
+- 垂直方向上的距离由margin决定。（完整的说法是：属于同一个BFC的两个相邻Box的margin会发生重叠（塌陷），与方向无关。）
+- 每个元素的左外边距与包含块的左边界相接触（从左向右），即使浮动元素也是如此。（这说明BFC中子元素不会超出他的包含块，而position为absolute的元素可以超出他的包含块边界）
+- BFC的区域*不会与float的元素区域重叠*
+- 计算BFC的高度时，*浮动子元素也参与计算*
+- BFC就是页面上的一个*隔离的独立容器*，容器里面的子元素不会影响到外面元素，反之亦然
+
+### BFC的作用
+
+**阻止外边距重叠**
+
+> 问题场景：两个相邻Box垂直方向margin重叠，以最大为准。
+>
+> BFC是如何解决的：给其中一个元素套上激发另一个BFC的容器，由于*隶属于不同BFC*从而导致margin不再重叠。
+
+```html
+<div class="b">
+    <div>01</div>
+    <div>02</div>
+</div>
+```
+
+![image-20240402130926063](./index.assets/image-20240402130926063.png)
+
+```html
+<div class="b">
+    <div class="bfc" style="display: float-root;">
+        <div>01</div>
+    </div>
+    <div>02</div>
+</div>
+```
+
+![image-20240402131301187](./index.assets/image-20240402131301187.png)
+
+**包含内部浮动，排除外部浮动**
+
+```css
+
+```
+
+|                                                              |                                                              |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![image-20240402131632574](./index.assets/image-20240402131632574.png) | ![image-20240402131657569](./index.assets/image-20240402131657569.png) |
+
+**解决高度塌陷问题**
+
+> 问题场景：由于子元素的浮动导致部分元素被遮挡、父元素的高度塌陷的问题。
+>
+> BFC是如何解决的：
+
+| 将父元素设置为BFC前                                          | 将父元素设置为BFC后                                          |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![image-20240402122948853](./index.assets/image-20240402122948853.png) | ![image-20240402122850562](./index.assets/image-20240402122850562.png) |
 
 ## Flex弹性盒子
 
