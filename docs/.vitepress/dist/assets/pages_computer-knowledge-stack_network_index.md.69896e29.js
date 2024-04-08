@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./app.ebe9dd63.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"pages/computer-knowledge-stack/network/index.md"}'),o={name:"pages/computer-knowledge-stack/network/index.md"};function n(r,s,c,p,d,i){return a(),t("div")}const k=e(o,[["render",n]]);export{m as __pageData,k as default};

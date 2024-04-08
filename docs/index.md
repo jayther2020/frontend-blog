@@ -11,13 +11,16 @@ hero:
   actions:
     - theme: alt
       text: 前端基础
-      link: /pages/front-end-stack1/
+      link: /pages/front-end-stack/
     - theme: alt
       text: 前端框架
-      link: /pages/front-end-stack2/
+      link: /pages/front-end-application/
     - theme: alt
       text: 计算机基础
       link: /pages/computer-knowledge-stack/
+    - theme: brand
+      text: 在线写项目
+      link: https://codesandbox.io/new
     - theme: brand
       text: 我的Gitee
       link: https://gitee.com/jayther2020

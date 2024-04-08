@@ -2,20 +2,19 @@ export const nav = [
   {
     text: "前端基础",
     items: [
-      { text: 'HTML', link: '/pages/front-end-stack1/basic/html/' },
-      { text: 'CSS', link: '/pages/front-end-stack1/basic/css1/' },
-      { text: 'Javascript', link: '/pages/front-end-stack1/basic/js1/' },
-      { text: '网络请求', link: '/pages/front-end-stack1/basic/js4/' },
-      { text: 'jQUERY', link: '/pages/front-end-stack1/tools/jquery/' },
+      { text: 'HTML', link: '/pages/front-end-stack/html-common/' },
+      { text: 'CSS', link: '/pages/front-end-stack/css-basic/' },
+      { text: 'Javascript', link: '/pages/front-end-stack/js-basic/' },
     ]
   },
   {
     text: "前端框架",
     items: [
-      { text: 'Vue', link: '/pages/front-end-stack2/framework/vue1/' },
-      { text: 'React', link: '/pages/front-end-stack2/framework/react/' },
-      { text: 'Nodejs', link: '/pages/front-end-stack2/framework/nodejs/' },
-      { text: 'D3.js', link: '/pages/front-end-stack2/vis/d3/' },
+      { text: 'Vue', link: '/pages/front-end-application/vue/v2-features/' },
+      { text: 'React', link: '/pages/front-end-application/react/basic/' },
+      { text: 'Nodejs', link: '/pages/front-end-application/nodejs/basic/' },
+      { text: '前端可视化', link: '/pages/front-end-application/visual/d3/' },
+      // { text: '小程序', link: '/pages/front-end-application/mini-program/wx/' },
 
     ]
   },
