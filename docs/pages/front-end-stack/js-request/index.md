@@ -580,6 +580,42 @@ axios.get('/foo/bar', {
 controller.abort()
 ```
 
+### 请求封装
+
+```js
+import request from "@/utils/request";
+
+export function getList(queryParams){
+  return request({
+    url:"/examMain/list",
+    method:'get',
+    params:queryParams
+  })
+}
+
+export function addToList(reqFormData){
+  return request({
+    url:"/examMain/add",
+    method:'post',
+    data:reqFormData
+  })
+}
+export function editOnList(reqFormData){
+  return request({
+    url:"/examMain/edit",
+    method:'put',
+    data:reqFormData
+  })
+}
+
+export function deleteData(ids){
+  return request({
+    url:`/examMain/delete/${ids}`,
+    method:'delete',
+  })
+}
+```
+
 ## 数据服务
 
 **json-server**

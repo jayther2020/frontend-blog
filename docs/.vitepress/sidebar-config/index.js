@@ -45,10 +45,10 @@ const basicSidebar = [
         text: "Bootstrap",
         link: "/pages/front-end-stack/css-bootstrap/",
       },
-      {
-        text: "CSS预处理器",
-        link: "/pages/front-end-stack/less-sass/",
-      },
+      // {
+      //   text: "CSS预处理器",
+      //   link: "/pages/front-end-stack/less-sass/",
+      // },
     ]
   },
   {
@@ -195,10 +195,10 @@ const cksSidebar = [
     text: "算法和数据结构",
     collapsible: true,
     items: [
-      // {
-      //   text: "算法理论",
-      //   link: "/pages/computer-knowledge-stack/algorithm/complexity/"
-      // },
+      {
+        text: "算法理论",
+        link: "/pages/computer-knowledge-stack/algorithm/complexity/"
+      },
       {
         text: "主要算法",
         link: "/pages/computer-knowledge-stack/algorithm/main/"
@@ -221,10 +221,10 @@ const cksSidebar = [
     text: "数据库相关",
     collapsible: true,
     items: [
-      {
-        text: "数据库原理",
-        link: "/pages/computer-knowledge-stack/db-theorm/"
-      },
+      // {
+      //   text: "数据库原理",
+      //   link: "/pages/computer-knowledge-stack/db-theorm/"
+      // },
       {
         text: "SQL",
         link: "/pages/computer-knowledge-stack/sql/basic/"

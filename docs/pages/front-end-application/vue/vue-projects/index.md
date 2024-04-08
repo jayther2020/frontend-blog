@@ -1,5 +1,39 @@
 # Vue项目
 
+## 目录划分
+
+> 项目第一步是做好项目目录划分
+
+<img src="./index.assets/屏幕截图 2023-01-30 234903.jpg" alt="屏幕截图 2023-01-30 234903" style="zoom:50%;" />
+
+## CSS相关
+
+> 1. normalize.css，工具CSS文件，可以初始化项目样式
+> 2. base.css，可以进行底层样式的设置，可参考下面代码
+
+```css
+@import url('./normalize.css');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+    --color-text: #666;
+    --color-high-text: #ff5777;
+}
+
+body{
+    user-select: none;
+    font-family: serif;
+}
+```
+
 ## Vue CLI
 
 > 安装Vue：`npm i vue@2`

@@ -219,3 +219,91 @@ longPolling('/server-endpoint', (err, data) => {
 });
 ```
 
+## 请求返回数据处理
+
+> 初步形态：使用时只能处理单个对象，遇到对象数组只能逐个map
+>
+
+```js
+export class BackToFrontTransfer {
+  constructor(data) {
+    this.id = data.id
+    ///关键部分///
+    this.activityTitle = data.examName
+    this.deptId = data.deptId
+    this.department = data.deptName
+    this.userId = data.userId
+    this.user = data.userName
+    this.idCard = data.idCard
+    this.isLeader = data.isLeader
+    this.examId = data.examId
+    this.remark = data.remark
+    this.phoneNumber = data.phoneNumber
+  }
+}
+```
+
+> 把数据列表map遍历逻辑封装在内
+>
+> 此时可以直接把请求结果放进去处理了
+
+```js
+export class BackToFrontTransfer {
+  constructor(data) {
+    class Single {
+      constructor(data) {
+        this.id = data.id
+        ///关键部分///
+        this.activityTitle = data.examName
+        this.optionScope = data.optionScope
+        this.startTime = data.startTime
+        this.state = data.state
+        this.endTime = data.endTime
+        this.isLeaderExam = data.isLeaderExam
+        this.remark = data.remark
+        this.deptName = data.deptName
+        this.userId = data.userId
+        this.pepCount = data.num
+      }
+    }
+    return data.rows.map(item => new Single(item))
+  }
+}
+```
+
+> 需要筛选的情况
+
+```js
+export class statsFrontTransfer {
+  constructor(data) {
+    class Single {
+      constructor(data) {
+        class OptionsStatsObj {
+          constructor(data) {
+            const AllOptions = [..."ABCDEFGH"],
+              finalOptions = []
+            AllOptions.forEach(el => {
+              finalOptions.push({
+                mark:el,
+                isAvailable: Boolean(data[`option${el}`]),
+                option: data[`option${el}`],
+                score: data[`score${el}`],
+                num: data[`num${el}`],
+              })
+            })
+            return finalOptions
+          }
+        }
+        this.id = data.id
+        ///关键部分///
+        this.sort = data.sort
+        this.quizTitle = data.subjectTitle
+        this.examId = data.examId
+        this.optionsStat = new OptionsStatsObj(data)
+      }
+    }
+    return data.rows.map(item => new Single(item))
+  }
+}
+```
+
