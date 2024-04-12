@@ -40,8 +40,8 @@ vue的文件规范
 </template>
 
 <script>
-//这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
-//例如：import 《组件名称》 from '《组件路径》';
+// 这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
+// 例如：import 《组件名称》 from '《组件路径》';
   import {cpn1} from "./components/cpn1"//组件引入
   export default {
     name:"app",//组件名称
@@ -85,14 +85,24 @@ vue的文件规范
 </style>
 ```
 
+## Vue编程命名约定
+
+| 命名规则     | kebab-case                   | camelCase                                   | PascalCase                        | 说明                                                         |
+| :----------- | :--------------------------- | :------------------------------------------ | :-------------------------------- | ------------------------------------------------------------ |
+| 组件名       | 推荐使用（模板）             | 可以,但*不推荐*                             | 推荐使用（JavaScript 、文件命名） | 模板中推荐使用kebab-case<br />JavaScript 中或者文件命名推荐使用PascalCase |
+| 自定义属性名 | 可以,使用时用对应 kebab-case | 可以,使用时可以使用 camelCase 或 kebab-case | 可以,但*不推荐*                   | 父组件中推荐使用kebab-case<br />子组件当中推荐使用camelCase  |
+| 自定义事件名 | 推荐使用                     | *不推荐*使用                                | *不推荐*使用                      | Vue 2 中事件名应避免使用 camelCase 或 PascalCase             |
+| 具名插槽名   | 可以,使用时用对应 kebab-case | 可以                                        | 可以,但*不推荐*                   | 使用时可以使用 camelCase 或 kebab-case                       |
+| 指令名       | 推荐使用                     | *不推荐*使用                                | *不推荐*使用                      | 应该全部使用 kebab-case                                      |
+
 ## 生命周期
 
 | 生命周期      | 释义                                                         | 该做的事 |
 | ------------- | ------------------------------------------------------------ | -------- |
 | beforeCreate  | 组件创建前，组件内部内容尚未渲染<br />在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用 |          |
-| created       | 组件创建后，组件内部内容尚未渲染<br />在实例创建完成后被立即调用,挂载阶段还没开始，$el 属性目前不可见 | 数据请求 |
+| created       | 组件创建后，组件内部内容尚未渲染<br />在实例创建完成后被立即调用，此时data可用，挂载阶段还没开始，$el 属性目前不可用 | 数据请求 |
 | beforeMount   | 将组件挂载在template上前，组件内部内容尚未渲染<br />在挂载开始之前被调用：相关的 render 函数首次被调用前 |          |
-| mounted       | 将组件挂载在template上后，组件内部内容已渲染<br />el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子 | 渲染数据 |
+| mounted       | 将组件挂载在template上后，组件内部内容已渲染<br />el（原来尚未有值） 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子 | 渲染数据 |
 | beforeUpdate  | 页面数据更新前，是在 DOM 树生成之前、虚拟 DOM 树生成之后调用，调用条件是这个 `vm` 实例已经`mounted()`过。该钩子函数在服务器渲染期间不被调用。 |          |
 | updated       | 页面数据更新后，由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。 |          |
 | beforeDestroy | 实例销毁之前调用。在这一步，实例仍然完全可用。<br />不能使用`keep-alive` |          |
@@ -122,7 +132,7 @@ vue的文件规范
 
 ### `$set()`和`$delete()`
 
-> 对象的直接新增、修改属性没有响应式，就需要`Vue.set(target,key,val)`方法设值了
+> 对象的*直接新增、修改属性*，或者*数组下标的值修改*是没有响应式的，就需要`Vue.set(target,key,val)`方法设值了
 >
 > 需要三参数，第一个是*目标对象名称*`target`，第二个是*目标对象属性*`key`，第三个是*新对象值*val
 >
@@ -153,9 +163,23 @@ var a=new Vue({
 >
 > 在vue实例内部可以使用`this.$nextTick()`方法
 
-```vue
-
+```js
+async function initPortView() {
+  /******** nextTick方法的应用 ********/
+  await nextTick()
+  resetListScrollEffect()
+  /******** 滚动特效 ********/
+  useListScrollEffect(
+    document.querySelectorAll("div.palette-window-content div.palette-display"),
+    palette_window_content.value,
+    "hide"
+  );
+}
 ```
+
+### `$forceUpdate()`
+
+强制vue重新渲染界面
 
 ## 插值
 
@@ -219,11 +243,23 @@ const vm = new Vue({
 ### is
 
 > 可以将一个普通的`html`标签变成一个组件
+>
+> 这在对于变通插入自定义元素的场景当中十分实用。
 
-```vue
+```html
 <div is="transition-group" style="display: grid; width: 100%; height: 100%; grid-gap: 5px"></div>
 <!-- 等价于 -->
 <transition-group style="display: grid; width: 100%; height: 100%; grid-gap: 5px"></transition-group>
+
+<svg>
+    <!-- 下面的标签会直接被vue渲染成style标签。 -->
+    <component is="style">
+      .grid-line { stroke-opacity: 0.2; stroke-dasharray: 2px; }
+      polygon.arrow { fill: black; }
+      text.desc { font-size: 12px; fill: black; text-anchor: middle; }
+      .axis_y text.desc { transform: rotate(-90); }
+    </component>
+</svg>
 ```
 
 ### v-on
@@ -236,37 +272,41 @@ const vm = new Vue({
 
 | 修饰符   | 释义                                                         |
 | -------- | ------------------------------------------------------------ |
-| .stop    | 调用e.stopPropogation()                                      |
-| .prevent | 调用e.preventDefault()                                       |
+| .stop    | 调用e.stopPropogation()，阻止事件继续传播                    |
+| .prevent | 调用e.preventDefault()，阻止默认事件                         |
 | .once    | 对事件只响应一次                                             |
 | .native  | 监听组件根元素的响应事件<br />组件不能直接监听点击，要监听组件点击就用它！ |
 | .self    | 当触发事件的元素为本元素时才触发                             |
-| .passive | 用在移动端的scroll事件，以提高浏览器响应速度                 |
+| .capture | 使用事件捕获模式                                             |
+| .passive | 用在移动端的scroll事件，以提高浏览器响应速度，不会阻止事件的默认行为 |
+| .exact   | 精确控制修饰符组合触发的事件                                 |
 
 #### 键盘事件修饰符
 
-可以用于对键盘事件修饰，对@keyup、@keypress使用方法如下
+可以用于对键盘事件修饰。这些修饰符可以单独使用,也可以组合使用,如 `@keyup.ctrl.enter`。
+
+@keyup、@keypress使用方法如下
 
 ```HTML
 <input @keypress.ctrl="...">
 ```
 
-| 修饰符         | 释义/备注            |
-| -------------- | -------------------- |
-| keyCode/键别名 | 监听特定按键按下事件 |
-| enter          |                      |
-| space          |                      |
-| esc            |                      |
-| tab            |                      |
-| delete         | delete&bksp          |
-| ctrl           |                      |
-| alt            |                      |
-| shift          |                      |
-| up             |                      |
-| down           |                      |
-| left           |                      |
-| right          |                      |
-| meta           | window徽标键         |
+| 修饰符         | 释义/备注                                                    |
+| :------------- | :----------------------------------------------------------- |
+| keyCode/键别名 | 监听特定按键按下事件                                         |
+| enter          | 回车键                                                       |
+| space          | 空格键                                                       |
+| esc            | 退出键                                                       |
+| tab            | 制表键                                                       |
+| delete         | 删除键 (删除和退格键)                                        |
+| ctrl           | 控制键                                                       |
+| alt            | alt 键                                                       |
+| shift          | shift 键                                                     |
+| up             | 方向键上                                                     |
+| down           | 方向键下                                                     |
+| left           | 方向键左                                                     |
+| right          | 方向键右                                                     |
+| meta           | 系统按键 (在 macOS 上是命令键,在 Windows 上是 Windows 徽标键) |
 
 #### 鼠标事件修饰符
 
@@ -281,7 +321,7 @@ const vm = new Vue({
 | middle | 鼠标滚轮键 |
 
 ```html
-<!---------------------------在这传事件对象要用$event变量（这是固定写法）---------->
+<!-- 在这传事件对象要用$event变量（固定写法）-->
 <div id="myVue" @contextmenu.prevent="alter($event)"></div>
 <script src="vue.js"></script>
 <script>
@@ -353,15 +393,13 @@ new Vue({
 
 它就控制控制元素的可见度，被控制的元素还是会占空间。
 
-> 相较于v-if，v-if有更高的切换开销，而v-show有更高的初始渲染开销。
+> 相较于v-if，v-if有更高的*切换开销*，而v-show有更高的*初始渲染开销*。
 >
-> 所以  *频繁切换用v-show，普通切换用v-if*
+> 所以为了提升页面渲染性能，我们约定：  *频繁切换用v-show，普通切换用v-if*
 
 ### v-for
 
-用于遍历渲染，写作`v-for="part in whole"`
-
-其中part为部分，whole为可遍历整体。
+用于遍历渲染，写作`v-for="part in whole"`，其中part为部分，whole为可遍历整体。
 
 > 对于数组，全部形态为: `(item,id) in arr`
 >
@@ -391,9 +429,7 @@ new Vue({
 </script>
 ```
 
-**关于循环动态设置图片路径**
-
-[见图片路径问题部分](#图片路径问题)
+**关于循环动态设置图片路径**（[见图片路径问题部分](/pages/front-end-application/vue/vue-projects/#图片路径问题)）
 
 ```html
 <div v-for="item in imgs" :key="item.id">
@@ -748,9 +784,7 @@ Vue.component("nav-bar",{  //直接把构造器内部的对象抽取出来放在
 
 任何一个组件有以下两个注册方式：
 
-1. **全局注册**
-
-   全局组件一般是交给`Vue.component()`去注册的。
+1. **全局注册**：全局组件一般是交给`Vue.component()`去注册的。
 
 ```js
 //cpn.vue
@@ -758,19 +792,19 @@ export default{
     //组件选项
 }
 
+//index.js
 import Cpn from "./route/to/cpn"
 Vue.component(Cpn)
 ```
 
-2. **局部注册**
-
-   局部组件是放在*某个Vue实例*或*某个组件*的components属性中的。这些组件会被限制在这个Vue实例或组件中。
+2. **局部注册**：局部组件是放在*某个Vue实例*或*某个组件*的components属性中的。这些组件会被限制在这个Vue实例或组件中。
 
 ```js
 //cpn.vue
 export default{
     //组件选项
 }
+
 /**********Vue实例***********/
 import Cpn from "./route/to/cpn"
 new Vue({
@@ -779,6 +813,7 @@ new Vue({
         Cpn,  //...
     }
 })
+
 /**********Vue组件***********/
 import Cpn from "./route/to/cpn"
 export default{
@@ -788,9 +823,7 @@ export default{
 }
 ```
 
-**父组件与子组件**
-
-一个组件可以作为另一个组件的子组件，以便在后者内部实现功能。
+**父组件与子组件**：一个组件可以作为另一个组件的子组件，以便在后者内部实现功能。
 
 ```js
 Vue.component('cpn1',{
@@ -818,11 +851,9 @@ Vue.component({
 | ---- | ----------------------- | ---------------------------- |
 | $el  | `this.$refs.sample.$el` | 指代的是vue组件的DOM元素本身 |
 
-## 父子通信——自定义属性
+## 父子通信：自定义属性
 
-可以用props来为整个组件定义自定义属性，所定义属性属于模板的最外层。
-
-传递不可越级！对于更复杂的组件，我们必须对数据是怎么绑定的和已有的自定义属性给搞清楚！
+可以用props来为父组件定义自定义属性（模板的最外层），用子组件的props属性接收父组件通过自定义属性传递的数据。
 
 ```html
 <div id="my_vue">
@@ -845,27 +876,28 @@ Vue.component({
 **prop验证**：对传递数据有要求的，要对props传入对象。键为传递变量，值为验证方法。
 
 ```js
-props:{
-    sx1:Number, //验证一种类型
-    sx2:[Number,String], //验证多种类型
-    sx3:{type:Number,required:true} //必须验证为某种类型
-    sx4:{type:Number,default:15} //有默认值的验证（针对基本数据类型）
-    sx5:{type:Array,default(){return []}} //有默认值的对象验证（针对对象，数组）
-    sx6:{validator:()=>{}} //有验证器的验证
+props: {
+    sx1: Number, //验证一种类型
+    sx2: [ Number, String], //验证多种类型
+    sx3: { type: Number, required: true } //必须验证为某种类型
+    sx4: { type: Number, default: 15 } //有默认值的验证（针对基本数据类型）
+    sx5: { type: Array, default: ()=>[] } //有默认值的对象验证（针对对象，数组）
+    sx6: { validator: ()=>{}} //有验证器的验证
 }
 ```
 
-## 子父通信——自定义事件
+## 子父通信：自定义事件
 
 >子组件可以通过自定义事件来向父组件通信。方法如下：
 >
+>子组件通过`this.$emit()`发起以xxx为自定义事件名的相应数据，父组件通过`@自定义事件名=""`进行事件响应和数据处理。
 >
->| 组件(传递点) | 内容                 | 响应函数                           | 函数属于   |
->| ------------ | -------------------- | ---------------------------------- | ---------- |
->| 子组件       | `@事件名="fn"`       | `fn(){this.$emit("自定义事件名")}` | 父组件     |
->| 父组件       | `@自定义事件名="f1"` | `f1(a){/*...*/}`                   | 上一级组件 |
 >
->传递亦不可越级！
+>| 组件(传递点) | 内容                 | 响应函数                                            | 函数属于   |
+>| ------------ | -------------------- | --------------------------------------------------- | ---------- |
+>| 子组件       | `@事件名="fn"`       | `fn(){this.$emit("自定义事件名", ...传递所需的值)}` | 父组件     |
+>| 父组件       | `@自定义事件名="f1"` | `f1(a){/*...*/}`                                    | 上一级组件 |
+>
 
 ```js
 Vue.component("father", {
@@ -897,27 +929,7 @@ new Vue({
 </template>  
 ```
 
-### 组件化中的v-model
-
-v-model其实是v-bind和v-oninput的简写，对子组件的input只需对value属性和@input事件正确响应即可。
-
-```html
-<div id="my-vue">
-  <cpn v-model="abc"></cpn>
-    <p>{{abc}}</p>
-</div>
-<template id="cpn">
-  <div>
-      <p>案例</p>
-      <input :value="e-value" @input="$emit('input',$event.target.value)">
-    </div>
-</template>
-```
-
-| <img src="./index.assets/202202022112169-16513885963651.jpg" style="zoom:100%;" /> | ![](./index.assets/202202022112171.jpg) |
-| ------------------------------------------------------------ | --------------------------------------- |
-
-### 双向绑定与v-bind.sync
+## 父子双向通信：`v-bind.sync`
 
 > 由于子组件不允许修改props的内容，所以当子组件真==需要改变props==内的值的时候，需要将修改信息的==通知转告给父组件，并交由父组件修改==。而且只有父组件才有修改传进props的值权限。
 >
@@ -954,6 +966,26 @@ v-model其实是v-bind和v-oninput的简写，对子组件的input只需对value
     </div>
 </template>
 ```
+
+### 组件化中的v-model
+
+v-model其实是v-bind和v-oninput的简写，对子组件的input只需对value属性和@input事件正确响应即可。
+
+```html
+<div id="my-vue">
+  <cpn v-model="abc"></cpn>
+    <p>{{abc}}</p>
+</div>
+<template id="cpn">
+  <div>
+      <p>案例</p>
+      <input :value="e-value" @input="$emit('input',$event.target.value)">
+    </div>
+</template>
+```
+
+| <img src="./index.assets/202202022112169-16513885963651.jpg" style="zoom:100%;" /> | ![](./index.assets/202202022112171.jpg) |
+| ------------------------------------------------------------ | --------------------------------------- |
 
 ## 直接访问
 
@@ -1003,14 +1035,6 @@ v-model其实是v-bind和v-oninput的简写，对子组件的input只需对value
 
 **$slot**：slot接收插槽内容的全部节点都会在这
 
-### 命名规则
-
-| 命名规则     | kebab-case             | camelCase                    | PascalCase |
-| ------------ | ---------------------- | ---------------------------- | ---------- |
-| 组件名       | 可以，只能用kebab-case |                              | 可以       |
-| 自定义属性名 |                        | 可以，使用时用对应kebab-case |            |
-| 自定义事件名 | 只能用它               |                              |            |
-
 ## slot插槽
 
 插槽是为了提高组件的扩展能力（*多态化*）而出现的
@@ -1047,7 +1071,7 @@ v-model其实是v-bind和v-oninput的简写，对子组件的input只需对value
 
 ### 具名插槽
 
-> 要多种类型的插槽的话，可以用slot的name属性分类。不填的默认default
+要多种类型的插槽的话，可以用slot的name属性分类。不填的默认default
 
 ```html
 <template id="cpn">
@@ -1079,17 +1103,15 @@ v-model其实是v-bind和v-oninput的简写，对子组件的input只需对value
 
 ### 作用域插槽
 
-> 作用域插槽是内部组件向外部的插入的模块提供内部组件的内容的方式
->
+作用域插槽是内部组件向外部的插入的模块提供内部组件的内容的方式
+
 > 插槽方向由外向内的话，作用域插槽传值方向则是由内向外
 
 | 示意图                                       | 代码案例                                                     |
 | -------------------------------------------- | ------------------------------------------------------------ |
 | ![slot-scope](./index.assets/slot-scope.png) | <img src="./index.assets/image-20230208095720439.png" alt="image-20230208095720439" style="zoom:80%;" /> |
 
-`组件内部`
-
-> 数据准备：格式为：`<slot :插槽作用域属性="要传递的数据">`
+`组件内部`：数据准备格式为：`<slot :插槽作用域属性="要传递的数据">`
 
 ```vue
 <template>
@@ -1127,11 +1149,8 @@ v-model其实是v-bind和v-oninput的简写，对子组件的input只需对value
         <span v-for="eevee in s.def"> {{eevee}} </span>
     </template>
 </cpn>
-```
 
-也可以这么写：
-
-```vue
+<!-- 也可以这么写： -->
 <cpn>
     <template slot-scope="{ def }"> <!-- 只管用变量 -->
         <span v-for="eevee in def"> {{eevee}} </span>
@@ -1141,9 +1160,8 @@ v-model其实是v-bind和v-oninput的简写，对子组件的input只需对value
 
 ### v-slot
 
-> 取代了之前的slot属性和slot-scope属性
+> 取代了之前的`slot`属性和`slot-scope`属性，格式为：`v-slot:插槽命名="作用域变量"`
 >
-> 格式为：`v-slot:插槽命名="作用域变量"`
 
 **针对具名插槽**
 
@@ -1179,26 +1197,32 @@ v-model其实是v-bind和v-oninput的简写，对子组件的input只需对value
 </cpn>
 ```
 
-**插槽提示**
-
-> 修饰slot最好不在slot标签加属性，而是用div包起来给div加上属性
+**插槽提示**：用CSS修饰slot最好不在slot标签加属性，而是用div包起来给div加上属性。
 
 ## 插槽应用：无渲染组件
 
 > 无渲染组件是一个不需要渲染任何自己的HTML的组件。
 >
-> 相反，它只管理状态和行为。它会暴露一个单独的作用域，让父组件或消费者完全控制应该渲染的内容。
+> 相反，它*只管理状态和行为*。它会暴露一个单独的作用域，让父组件或消费者完全控制应该渲染的内容。
 >
 > 无渲染组件可以在没有任何额外的元素情况之下精确的渲染你所传递的内容。
 >
-> 1. 表现和行为分离：无渲染组件只处理状态和行为，不会对设计或布局强加任何的决策。
+> 1. **表现和行为分离**：无渲染组件只处理状态和行为，不会对设计或布局强加任何的决策。
 >
 >    比如可以重用无渲染组件来实现*任何布局效果*的标签输入控件。
 >
-> 2. 无渲染组件结构：一个无渲染组件暴露一个单一的作用域插槽，使用者可以提供他们想要渲染的整个模板。
+> 2. **无渲染组件结构**：一个无渲染组件暴露一个单一的作用域插槽，使用者可以提供他们想要渲染的整个模板。
 
-```
+```vue
+<!-- Parent or Consumer -->
+<renderless-component-example>
+    <h1 slot-scope="{}">
+        Hello world!
+    </h1>
+</renderless-component-example>
 
+<!-- Renders: -->
+<h1>Hello world!</h1>
 ```
 
 ## Event bus
@@ -1209,7 +1233,7 @@ v-model其实是v-bind和v-oninput的简写，对子组件的input只需对value
 >
 > 可以作为模块引入，也可以直接通过vue.prototype作用于全局：
 
-| 常用方法示意图                                               |
+| 常用方法示意图:<br />在能够访问Event bus的组件当中，某个组件发起xxx为事件名的自定义事件传递数据，其他组件则可以直接通过接收xxx来进行后续响应操作。 |
 | ------------------------------------------------------------ |
 | <img src="./index.assets/eventbus-1675855742446-2.jpg" alt="eventbus" style="zoom:80%;" /> |
 
@@ -1247,13 +1271,13 @@ export default {
             libra: '天秤',
         };
     },
-    created() { //响应函数放到created里面
+    created() { // 响应函数放到created里面进行注册。
         eventBus.$on('change', value => {
             this.libra = value;
         });
     },
     beforeDestroy() {
-        eventBus.$off('change'); //组件一销毁就需要关闭监听，以防重复监听
+        eventBus.$off('change'); // 组件一销毁就需要关闭监听，以防重复监听
     },
 };
 ```
@@ -1268,7 +1292,7 @@ export default {
 >
 > 1. 新建插件对象，暴露一个 `install` 方法。其第一个参数是 `Vue` 构造器，第二个参数是一个可选的选项对象
 > 2. 在里面先用`Vue.extend`命令将Vue组件转为组件构造器，然后找个变量实例化该构造器
-> 3. 
+> 3. 添加实例方法或属性：可以将组件实例添加到 Vue 的原型上，使其在所有组件中可用，或者根据需要进行其他操作。
 
 ```js
 import ToastMain from './ToastPad.vue'
@@ -1284,19 +1308,19 @@ const ToastCpn = {
 }
 
 export {
-  ToastCpn, //Vue组件Toast主体部分，用于安装,以方便在其他Vue组件内直接使用【this.Toast()】
-  $Toast //暴露Toast构造函数，用于其他未引入vue的js文件直接使用Toast功能【$Toast()】
+  ToastCpn, // Vue组件Toast主体部分，用于安装,以方便在其他Vue组件内直接使用【this.Toast()】
+  $Toast // 暴露Toast构造函数，用于其他未引入vue的js文件直接使用Toast功能【$Toast()】
 }
 ```
 
 ## 混入mixin
 
-> 混入 (mixin) 提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能。一个混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项。
->
-> 在 js 文件创建一个 Vue 实例
->
-> 将 js 内的组件引入到组件当中，会把 js 文件内的实例混入到当前组件中，实现组件功能复用
->
+混入 (mixin) 提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能。
+
+一个混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项。
+
+将 js 内的组件引入到组件当中，会把 js 文件内的实例混入到当前组件中，实现组件功能复用
+
 > **注意**：当组件选项与混入选项冲突时以==组件优先==
 >
 > 同时定义生命周期选项时，==mixin的会先触发，比组件的同名生命周期快==
@@ -1347,4 +1371,66 @@ export default {
 ```
 
 ## Vue过渡
+
+例：路由跳转时应用页面过渡效果
+
+```html
+<router-view v-slot="{Component,route}">
+    <transition :name="route.meta.transition">
+        <component :is="Component"></component>
+    </transition>
+</router-view>
+```
+
+vue通过下面的类来对元素来进行UI过渡行为的：
+
+![img](./index.assets/transition-classes.2BufuvZR.png)
+
+```css
+.scale-slide-left-enter-active,
+.scale-slide-left-leave-active {
+  position: absolute;
+  transition: all 0.85s ease;
+}
+
+.scale-slide-left-enter-from {
+  left: -100%;
+}
+
+.scale-slide-left-enter-to {
+  left: 0;
+}
+
+.scale-slide-left-leave-from {
+  transform: scale(1);
+  pointer-events: all;
+}
+
+.scale-slide-left-leave-to {
+  transform: scale(0.8);
+  pointer-events: none;
+  z-index: -1;
+}
+```
+
+对一个列表的元素的过渡使用`transition-group`
+
+```html
+<!--    色板主板-->
+<div class="generate-color-board">
+  <transition-group name="sort">
+    <generate-color-panel
+      v-for="(item, id) in ColorsArr"
+      :key="item.id"
+      @dragstart="dragstart(id)"
+      @dragover.prevent
+      @dragenter="dragenter(id)"
+      @dragend="dragend"
+      :color="item.color"
+      @color-change="(color)=>palElemChange(id,color)"
+      @delete="palElemDelete(id)"
+    ></generate-color-panel>
+  </transition-group>
+</div>
+```
 

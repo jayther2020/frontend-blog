@@ -4,38 +4,6 @@
 
 ---
 
-### 原理：Proxy
-
-```js
-//数据源
-const data = {
-  text: 'Hi Vue3!'
-}
-```
-
-对于Proxy部分就写如下内容
-
-```js
-var obj = new Proxy(data, {
-  get: function (target, key, receiver) {
-    console.log(`getting ${key}!`);
-    return Reflect.get(target, key, receiver);
-  },
-  set: function (target, key, value, receiver) {
-    console.log(`setting ${key}!`);
-    return Reflect.set(target, key, value, receiver);
-  }
-});
-```
-
-调用时如下
-
-```js
-//要点：要过obj这道门关才奏效！下面设值操作也是如此。
-obj.count = 1; // setting count!
-++obj.count; // getting count! setting count! 2
-```
-
 ## 新变化
 
 > 1. 创建Vue实例要用`Vue.createApp()`方法

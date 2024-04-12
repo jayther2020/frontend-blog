@@ -168,4 +168,4 @@ x ?? (x = y);
 *  `Object.hasOwn()`
 *  `at()`
 *  `error.cause`
-*  Top-level Await
+*  [:Top-level Await](/pages/front-end-stack/async-js/#顶行await)
