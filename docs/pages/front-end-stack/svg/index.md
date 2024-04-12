@@ -1,5 +1,16 @@
 # SVG基础
 
+## 预览方法
+
+> `svg`标签必须带上`xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"`以供浏览器预览和图片转换
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="logo" viewBox="0 0 128 128" width="24" height="24" data-v-0495d436="">
+    <path fill="#42b883" d="M78.8,10L64,35.4L49.2,10H0l64,110l64-110C128,10,78.8,10,78.8,10z" data-v-0495d436=""/>
+    <path fill="#35495e" d="M78.8,10L64,35.4L49.2,10H25.6L64,76l38.4-66H78.8z" data-v-0495d436=""/>
+</svg>
+```
+
 ## 渲染顺序
 
 在`svg`标签顶层的元素会出现在绘制的底层，而在`svg`标签底层的元素会绘制在顶层
