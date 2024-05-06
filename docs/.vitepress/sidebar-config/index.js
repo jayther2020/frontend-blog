@@ -266,10 +266,10 @@ const usefulToolsSidebar = [
         text: "代码片段",
         link: "/pages/useful/snippets/"
       },
-      {
-        text: "批处理脚本",
-        link: "/pages/useful/batch/"
-      },
+      // {
+      //   text: "批处理脚本",
+      //   link: "/pages/useful/batch/"
+      // },
       // {
       //   text: "Swiss工具库",
       //   link: "/pages/useful/swiss/"
